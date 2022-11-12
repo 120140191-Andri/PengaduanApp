@@ -39,7 +39,7 @@ $(function () {
 								yPos: offset.top,
 							},
 							success: function (data) {
-								
+								toastr.success('Berhasil!', 'Properti dipindah');
 							},
 							error: function (request, status, error) {
 								toastr.warning('Priksa koneksi!');
