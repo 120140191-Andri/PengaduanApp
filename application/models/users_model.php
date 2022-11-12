@@ -33,6 +33,15 @@ Class users_model extends CI_Model
         
     }
 
+    function AmbilUserKalab()
+    {
+        $dat = array(
+            'role' => 'kalab',
+        );
+        $res = $this->db->get_where('users', $dat);
+        return $res;
+    }
+
     function AmbilProperti()
     {
         $res = $this->db->get('properti');

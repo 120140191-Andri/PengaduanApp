@@ -24,9 +24,9 @@ class Kalab extends CI_Controller {
             }else{
                 redirect('/');
             }
-          }else{
+        }else{
             redirect('/');
-          }
+        }
     }
 
 	public function index()
