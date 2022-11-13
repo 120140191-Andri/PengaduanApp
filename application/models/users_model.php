@@ -37,9 +37,75 @@ Class users_model extends CI_Model
     {
         $dat = array(
             'role' => 'kalab',
+            'lab.id_user' => null,
         );
+
+        $this->db->from('lab');
+        $this->db->join('users', 'users.id = lab.id_user', 'right');
+        $this->db->where($dat);
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function AmbilSemuaUserKalab()
+    {
+        $dat = array(
+            'role' => 'kalab',
+        );
+
+        $this->db->where($dat);
+        $res = $this->db->get('users');
+        return $res;
+    }
+
+    function CekEmailUser($email, $id)
+    {
+        $dat = array(
+            'email' => $email,
+            'id !=' => $id,
+        );
+
         $res = $this->db->get_where('users', $dat);
         return $res;
+    }
+
+    function TambahKalab($nama, $email)
+    {
+        $dat = array(
+            'nama' => $nama,
+            'email' => $email,
+            'role' => 'kalab',
+        );
+
+        $this->db->insert('users',$dat);
+        return $this->db->error();
+    }
+
+    function AmbilUserWhr($id)
+    {
+        $dat = array(
+            'id' => $id,
+        );
+        $this->db->where($dat);
+        $res = $this->db->get('users');
+        return $res;
+    }
+
+    function UbahKalab($nama, $id, $email)
+    {
+        $dat = array(
+            'nama' => $nama,
+            'email' => $email,
+        );
+
+        $whr = array(
+            'id' => $id,
+        );
+
+        $this->db->where($whr);
+        $this->db->set($dat);
+        $this->db->update('users');
+        return $this->db->error();
     }
 
     function AmbilProperti()

@@ -46,6 +46,15 @@ class Rt extends CI_Controller {
         $this->load->view('Rt/ListLab', $dat);
     }
 
+    public function List_Kalab(){
+        $this->load->helper('url');
+
+        $dat['kalab'] = $this->users_model->AmbilSemuaUserKalab()->result();
+        // var_dump($dat);
+        // die;
+        $this->load->view('Rt/ListKalab', $dat);
+    }
+
     public function Tambah_Lab(){
         $this->load->helper('url');
 
@@ -53,6 +62,33 @@ class Rt extends CI_Controller {
         // var_dump($dat);
         // die;
         $this->load->view('Rt/TambahLab', $dat);
+    }
+
+    public function Tambah_Kalab(){
+        $this->load->helper('url');
+        //echo password_hash('1234',PASSWORD_DEFAULT);
+        $this->load->view('Rt/TambahKalab');
+    }
+
+    public function Ubah_Lab($id){
+        $this->load->helper('url');
+
+        $dat['id'] = $id;
+        $dat['lab_n'] = $this->lab_model->AmbilLabWhr($id)->result();
+        $dat['kalab'] = $this->users_model->AmbilUserKalab()->result();
+        // var_dump($dat);
+        // die;
+        $this->load->view('Rt/UbahLab', $dat);
+    }
+
+    public function Ubah_Kalab($id){
+        $this->load->helper('url');
+
+        $dat['id'] = $id;
+        $dat['user_n'] = $this->users_model->AmbilUserWhr($id)->result();
+        // var_dump($dat);
+        // die;
+        $this->load->view('Rt/UbahKalab', $dat);
     }
 
     public function sys_tambah_lab(){
@@ -65,6 +101,52 @@ class Rt extends CI_Controller {
             redirect('Rt/List_lab');
         }else{
             redirect('Rt/Tambah_lab');
+        }
+    }
+
+    public function sys_tambah_kalab(){
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+
+        $cek = count($this->users_model->CekEmailUser($email)->result());
+        if($cek == 0){
+            $res = $this->users_model->TambahKalab($nama, $email);
+            redirect('Rt/List_Kalab');
+        }else{
+            $this->session->set_flashdata('pesan', 'Email Sudah Terdaftar!');
+            redirect('Rt/Tambah_Kalab');
+        }
+
+    }
+
+    public function sys_ubah_lab(){
+        $nama = $this->input->post('nama_lab');
+        $id = $this->input->post('kalab');
+        $id_lab = $this->input->post('id_lab');
+
+        $cek = count($this->lab_model->CekLab($nama, $id_lab)->result());
+        if($cek == 0){
+            $res = $this->lab_model->UbahLab($nama, $id, $id_lab);
+            redirect('Rt/List_lab');
+        }else{
+            $this->session->set_flashdata('pesan', 'Nama Sudah Terdaftar!');
+            redirect('Rt/List_lab');
+        }
+
+    }
+
+    public function sys_ubah_kalab(){
+        $nama = $this->input->post('nama');
+        $id = $this->input->post('id');
+        $email = $this->input->post('email');
+
+        $cek = count($this->users_model->CekEmailUser($email, $id)->result());
+        if($cek == 0){
+            $res = $this->users_model->UbahKalab($nama, $id, $email);
+            redirect('Rt/List_Kalab');
+        }else{
+            $this->session->set_flashdata('pesan', 'Nama Sudah Terdaftar!');
+            redirect('Rt/Ubah_Kalab/'.$id);
         }
 
     }

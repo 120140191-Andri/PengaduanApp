@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RT - Tambah Lab</title>
+	<title>RT - Ubah Kalab</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
@@ -27,15 +27,16 @@
 		<li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
 	</ul>
 
-    <form action="<?= base_url('Rt/sys_tambah_lab') ?>" method="post">
-        <input type="text" name="nama_lab" placeholder="nama lab">
-        <select name="kalab">
-            <?php foreach($kalab as $l){ ?>
-                <option value="<?php echo $l->id; ?>"><?php echo $l->nama; ?>   </option>
-            <?php } ?>
-        </select> 
-        <input type="submit" value="Tambah">
+    <form action="<?= base_url('Rt/sys_ubah_kalab') ?>" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="text" name="nama" placeholder="Nama" value="<?= $user_n[0]->nama ?>">
+        <input type="email" name="email" placeholder="Email" value="<?= $user_n[0]->email ?>">
+        <input type="submit" value="Ubah">
     </form>
+
+    <div class="notif">
+        <?php echo $this->session->flashdata('pesan'); ?>
+    </div>
 
 </body>
 

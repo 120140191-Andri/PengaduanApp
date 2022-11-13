@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RT - List Lab</title>
+	<title>RT - List Kalab</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
@@ -34,23 +34,23 @@
 		<li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
 	</ul>
 
-    <a href="<?= base_url('Rt/Tambah_Lab') ?>">Tambah Lab</a>
+    <a href="<?= base_url('Rt/Tambah_Kalab') ?>">Tambah Kalab</a>
 	<br><br><hr>
 
 	<table class="table table-striped display" id="mydata">
 		<thead>
 			<tr>
-				<th>Nama Lab</th>
-				<th>Kepala Lab</th>
+				<th>Nama</th>
+				<th>Email</th>
 				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody id="show_data">
-			<?php foreach ($lab as $row){ ?>
+			<?php foreach ($kalab as $row){ ?>
 			<tr>
-				<td><?php echo $row->nama_lab; ?></td>
-				<td><?php echo $row->nama != null ? $row->nama : 'Belum Ditentukan'; ?></td>
-				<td><a href="<?= base_url('Rt/Ubah_Lab/'.$row->id_lab) ?>">Ubah</a></td>
+				<td><?php echo $row->nama; ?></td>
+				<td><?php echo $row->email; ?></td>
+				<td><a href="<?= base_url('Rt/Ubah_Kalab/'.$row->id) ?>">Ubah</a></td>
 			</tr>
 			<?php } ?>
 		</tbody>
