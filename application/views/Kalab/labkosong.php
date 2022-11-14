@@ -16,10 +16,9 @@
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 	
+    <h5>Anda belum mendapatkan akses lab, silahkan minta kepada admin RT lalu logout dan login kembali</h5>
+
     <ul>
-		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
-        <li><a href="<?= base_url('Rt/List_lab') ?>">List Lab</a></li>
-        <li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
     </ul>
 

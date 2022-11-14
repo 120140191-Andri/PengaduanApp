@@ -32,6 +32,16 @@ Class lab_model extends CI_Model
         return $res;
     }
 
+    function CekLabTambah($nama)
+    {
+        $dat = array(
+            'nama_lab' => $nama,
+        );
+
+        $res = $this->db->get_where('lab', $dat);
+        return $res;
+    }
+
     function CekLab($nama, $id)
     {
         $dat = array(
@@ -51,6 +61,20 @@ Class lab_model extends CI_Model
         );
 
         $this->db->insert('lab',$dat);
+        $insert_id = $this->db->insert_id();
+
+        $dat = array(
+            'id_lab' => $insert_id,
+        );
+
+        $whr = array(
+            'id' => $id,
+        );
+
+        $this->db->where($whr);
+        $this->db->set($dat);
+        $this->db->update('users');
+
         return $this->db->error();
     }
 
@@ -68,6 +92,31 @@ Class lab_model extends CI_Model
         $this->db->where($whr);
         $this->db->set($dat);
         $this->db->update('lab');
+
+        $dat = array(
+            'id_lab' => 0,
+        );
+
+        $whr = array(
+            'id_lab' => $id_lab,
+        );
+
+        $this->db->where($whr);
+        $this->db->set($dat);
+        $this->db->update('users');
+
+        $dat = array(
+            'id_lab' => $id_lab,
+        );
+
+        $whr = array(
+            'id' => $id,
+        );
+
+        $this->db->where($whr);
+        $this->db->set($dat);
+        $this->db->update('users');
+
         return $this->db->error();
     }
 

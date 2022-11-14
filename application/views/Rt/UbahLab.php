@@ -21,10 +21,10 @@
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 
 	<ul>
-		<li><a href="">s</a></li>
+		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
 		<li><a href="<?= base_url('Rt/List_lab') ?>">List Lab</a></li>
-		<li><a href="<?= base_url('Rt/List_Rt') ?>">List RT</a></li>
 		<li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
+		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
 	</ul>
 
     <form action="<?= base_url('Rt/sys_ubah_lab') ?>" method="post">

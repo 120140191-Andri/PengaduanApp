@@ -95,7 +95,7 @@ class Rt extends CI_Controller {
         $nama = $this->input->post('nama_lab');
         $id = $this->input->post('kalab');
 
-        $cek = count($this->lab_model->CekLab($nama)->result());
+        $cek = count($this->lab_model->CekLabTambah($nama)->result());
         if($cek == 0){
             $res = $this->lab_model->TambahLab($nama, $id);
             redirect('Rt/List_lab');
@@ -108,7 +108,7 @@ class Rt extends CI_Controller {
         $nama = $this->input->post('nama');
         $email = $this->input->post('email');
 
-        $cek = count($this->users_model->CekEmailUser($email)->result());
+        $cek = count($this->users_model->CekEmailUserTambah($email)->result());
         if($cek == 0){
             $res = $this->users_model->TambahKalab($nama, $email);
             redirect('Rt/List_Kalab');
@@ -116,7 +116,6 @@ class Rt extends CI_Controller {
             $this->session->set_flashdata('pesan', 'Email Sudah Terdaftar!');
             redirect('Rt/Tambah_Kalab');
         }
-
     }
 
     public function sys_ubah_lab(){
@@ -145,10 +144,15 @@ class Rt extends CI_Controller {
             $res = $this->users_model->UbahKalab($nama, $id, $email);
             redirect('Rt/List_Kalab');
         }else{
-            $this->session->set_flashdata('pesan', 'Nama Sudah Terdaftar!');
+            $this->session->set_flashdata('pesan', 'Email Sudah Terdaftar!');
             redirect('Rt/Ubah_Kalab/'.$id);
         }
 
+    }
+
+    public function sys_hapus_kalab($id){
+        $res = $this->users_model->HapusKalab($id);
+        redirect('Rt/List_Kalab');
     }
 
 	public function ambil_properti(){

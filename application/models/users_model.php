@@ -18,6 +18,7 @@ Class users_model extends CI_Model
                     'email'    => $res[0]->email,
                     'id'       => $res[0]->id,
                     'r'        => $res[0]->role,
+                    'id_lab'   => $res[0]->id_lab,
                 );
              
                 $this->session->set_userdata($data_login);
@@ -47,6 +48,18 @@ Class users_model extends CI_Model
         return $res;
     }
 
+    function AmbilUserTeknisi()
+    {
+        $dat = array(
+            'role' => 'teknisi',
+            'id_lab' => null,
+        );
+
+        $this->db->where($dat);
+        $res = $this->db->get('users');
+        return $res;
+    }
+
     function AmbilSemuaUserKalab()
     {
         $dat = array(
@@ -55,6 +68,28 @@ Class users_model extends CI_Model
 
         $this->db->where($dat);
         $res = $this->db->get('users');
+        return $res;
+    }
+
+    function AmbilSemuaUserTeknisiLab($id_lab)
+    {
+        $dat = array(
+            'role' => 'teknisi',
+            'id_lab' => $id_lab,
+        );
+
+        $this->db->where($dat);
+        $res = $this->db->get('users');
+        return $res;
+    }
+
+    function CekEmailUserTambah($email)
+    {
+        $dat = array(
+            'email' => $email,
+        );
+
+        $res = $this->db->get_where('users', $dat);
         return $res;
     }
 
@@ -75,6 +110,19 @@ Class users_model extends CI_Model
             'nama' => $nama,
             'email' => $email,
             'role' => 'kalab',
+        );
+
+        $this->db->insert('users',$dat);
+        return $this->db->error();
+    }
+
+    function TambahTeknisi($nama, $email, $id_lab)
+    {
+        $dat = array(
+            'nama' => $nama,
+            'email' => $email,
+            'role' => 'teknisi',
+            'id_lab' => $id_lab,
         );
 
         $this->db->insert('users',$dat);
@@ -108,41 +156,45 @@ Class users_model extends CI_Model
         return $this->db->error();
     }
 
-    function AmbilProperti()
-    {
-        $res = $this->db->get('properti');
-        return $res;
-    }
-
-    function CekProperti($id)
+    function UbahTeknisi($nama, $id, $email)
     {
         $dat = array(
+            'nama' => $nama,
+            'email' => $email,
+        );
+
+        $whr = array(
             'id' => $id,
         );
 
-        $res = $this->db->get_where('properti', $dat);
-        return $res;
-    }
-    
-    function TambahProperti($id, $x, $y)
-    {
-        $dat = array(
-            'id' => $id,
-            'xPos' => $x,
-            'yPos' => $y,
-        );
-
-        $this->db->insert('properti',$dat);
+        $this->db->where($whr);
+        $this->db->set($dat);
+        $this->db->update('users');
         return $this->db->error();
     }
 
-    function UbahProperti($id, $x, $y)
+    function HapusKalab($id)
     {
-        $this->db->set('xPos', $x);
-        $this->db->set('yPos', $y);
         $this->db->where('id', $id);
-        $this->db->update('properti');
+        $this->db->delete('users');
+
+        $dat = array(
+            'id_user' => 0,
+        );
+
+        $this->db->where('id_user', $id);
+        $this->db->set($dat);
+        $this->db->update('lab');
         return $this->db->error();
     }
+
+    function HapusTeknisi($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('users');
+
+        return $this->db->error();
+    }
+
 }
 ?>

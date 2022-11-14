@@ -17,9 +17,9 @@
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 	
     <ul>
-		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
-        <li><a href="<?= base_url('Rt/List_lab') ?>">List Lab</a></li>
-        <li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
+		<li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
+        <li><a href="<?= base_url('Kalab/Manage_lab') ?>">Manage Lab</a></li>
+        <li><a href="<?= base_url('Kalab/List_Teknisi') ?>">List Teknisi</a></li>
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
     </ul>
 
