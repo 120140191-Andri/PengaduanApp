@@ -181,4 +181,23 @@ class Rt extends CI_Controller {
 		var_dump($res);
 	}
 
+    public function Ganti_Password(){
+        $this->load->helper('url');
+
+        $dat['id'] = $this->session->userdata('id');
+        $this->load->view('Rt/GantiPassword', $dat);
+    }
+
+    public function sys_ganti_password(){
+        $this->load->helper('url');
+
+        $id = $this->input->post('id');
+        $password = $this->input->post('password');
+
+        $this->users_model->GantiPassword($id, $password);
+
+        redirect('Rt/');
+
+    }
+
 }

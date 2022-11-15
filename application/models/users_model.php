@@ -196,5 +196,16 @@ Class users_model extends CI_Model
         return $this->db->error();
     }
 
+    function GantiPassword($id, $pass)
+    {
+        $dat = array(
+            'password' => password_hash($pass,PASSWORD_DEFAULT),
+        );
+
+        $this->db->where('id', $id);
+        $this->db->set($dat);
+        $this->db->update('users');
+    }
+
 }
 ?>

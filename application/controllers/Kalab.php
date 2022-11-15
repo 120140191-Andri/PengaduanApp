@@ -184,4 +184,23 @@ class Kalab extends CI_Controller {
         redirect('Kalab/Manage_lab');
     }
 
+    public function Ganti_Password(){
+        $this->load->helper('url');
+
+        $dat['id'] = $this->session->userdata('id');
+        $this->load->view('Kalab/GantiPassword', $dat);
+    }
+
+    public function sys_ganti_password(){
+        $this->load->helper('url');
+
+        $id = $this->input->post('id');
+        $password = $this->input->post('password');
+
+        $this->users_model->GantiPassword($id, $password);
+
+        redirect('Kalab/');
+
+    }
+
 }
