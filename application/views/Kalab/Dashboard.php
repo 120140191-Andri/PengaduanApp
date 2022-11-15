@@ -20,6 +20,7 @@
 		<li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
         <li><a href="<?= base_url('Kalab/Manage_lab') ?>">Manage Lab</a></li>
         <li><a href="<?= base_url('Kalab/List_Teknisi') ?>">List Teknisi</a></li>
+		<li><a href="<?= base_url('Rt/List_Laporan') ?>">List Laporan</a></li>
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
     </ul>
 

@@ -37,3 +37,22 @@
 	transform: translate(-50%, -50%);
     color: #252525;
 }
+
+.box-edit-hapus{
+	background-color:white;
+	padding: 10px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border-bottom-right-radius: 10px;
+}
+
+.box-edit-hapus > a{
+	/* color: white; */
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.fa-trash{
+	color: red;
+}

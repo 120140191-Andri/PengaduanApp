@@ -13,11 +13,12 @@ $(function () {
 			for (var i = 0; i < dats.length; ++i) {
 				
 				let nama_prop = dats[i]['nama_prop'];
+				let id_prop = dats[i]['id'];
 
 				if(dats[i]['status'] == 'aman'){
-					$('.kontainer-atur').append($("<div id='" + nama_prop + "' class='prop_aman ui-widget-content'><p>" + nama_prop + "</p></div>"));
+					$('.kontainer-atur').append($("<div id='" + nama_prop + "' class='prop_aman ui-widget-content'><p>" + nama_prop + "</p> <div class='box-edit-hapus'><a href='"+ baseurl + '/Kalab/edit_nama_properti/' + id_prop +"'><i class='fa-solid fa-pen-to-square'></i></a>&nbsp;<a href='"+ baseurl + '/Kalab/system_hapus_properti/' + id_prop +"'><i class='fa-solid fa-trash'></i></a></div> </div>"));
 				}else{
-					$('.kontainer-atur').append($("<div id='" + nama_prop + "' class='prop_problem ui-widget-content'><p>" + nama_prop + "</p></div>"));
+					$('.kontainer-atur').append($("<div id='" + nama_prop + "' class='prop_problem ui-widget-content'><p>" + nama_prop + "</p> <div class='box-edit-hapus'><a href=''><i class='fa-solid fa-pen-to-square'></i></a>&nbsp;<a href=''><i class='fa-solid fa-trash'></i></a></div> </div>"));
 				}
 
 				$("#" + nama_prop).offset({
@@ -44,6 +45,7 @@ $(function () {
 							},
 							success: function (data) {
 								toastr.success('Berhasil!', 'Properti dipindah');
+								setTimeout( () => window.location = baseurl + 'Kalab/Manage_lab', 400 );
 							},
 							error: function (request, status, error) {
 								toastr.warning('Priksa koneksi!');
@@ -115,6 +117,7 @@ $(function () {
 							toastr.warning('Nama Properti Sudah ada!');
 						} else {
 							toastr.success('Berhasil!', 'Properti dibuat');
+							setTimeout( () => window.location = baseurl + 'Kalab/Manage_lab', 400 );
 						}
 					},
 					error: function (request, status, error) {

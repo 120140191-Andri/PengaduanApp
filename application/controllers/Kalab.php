@@ -154,4 +154,34 @@ class Kalab extends CI_Controller {
 		var_dump($res);
 	}
 
+    public function edit_nama_properti($id){
+        $this->load->helper('url');
+
+        $dat['id'] = $id;
+        $dat['properti_n'] = $this->properti_model->AmbilPropertiWhr($id)->result();
+        // var_dump($dat);
+        // die;
+        $this->load->view('Kalab/UbahNamaProperti', $dat);
+    }
+
+    public function sys_ubah_nama_properti(){
+        $nama_asli = $this->input->post('nama_prop');
+        $nama = str_replace(' ', '-', $nama_asli);
+        $id = $this->input->post('id');
+
+        $cek = count($this->properti_model->CekNamaProperti($nama, $id)->result());
+        if($cek == 0){
+            $res = $this->properti_model->UbahNamaProperti($nama, $id);
+            redirect('Kalab/Manage_lab');
+        }else{
+            $this->session->set_flashdata('pesan', 'Nama Sudah Terdaftar!');
+            redirect('Kalab/edit_nama_properti/'.$id);
+        }
+    }
+
+    public function system_hapus_properti($id){
+        $res = $this->properti_model->HapusProperti($id);
+        redirect('Kalab/Manage_lab');
+    }
+
 }

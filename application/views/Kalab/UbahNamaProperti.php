@@ -4,37 +4,39 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Kalab - Manage Lab</title>
+	<title>Kalab - Ubah Nama Properti</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-	<script src="<?= base_url('assets/js/Manage_Lab.js') ?>"></script>
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
-	<input id="id_lab" type="hidden" value="<?= $id_lab ?>">
-	<input id="nama_lab" type="hidden" value="<?= $nama_lab ?>">
 
 	<ul>
-        <li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
+		<li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
         <li><a href="<?= base_url('Kalab/Manage_lab') ?>">Manage Lab</a></li>
         <li><a href="<?= base_url('Kalab/List_Teknisi') ?>">List Teknisi</a></li>
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
 	</ul>
-	<hr>
 
-	<input type="text" id="nama">
-	<div id="tambah">Tambah</div>
+    <form action="<?= base_url('Kalab/sys_ubah_nama_properti') ?>" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="text" name="nama_prop" placeholder="Nama" value="<?= $properti_n[0]->nama_prop ?>">
+        <input type="submit" value="Ubah">
+    </form>
 
-	<div id="posX"></div>
-	<div id="posY"></div>
+    <div class="notif">
+        <?php echo $this->session->flashdata('pesan'); ?>
+    </div>
 
-	<div class="kontainer-atur"></div>
 </body>
 
 </html>
