@@ -1,39 +1,45 @@
 <?php
 Class properti_model extends CI_Model
 {
-    function AmbilProperti()
+    function AmbilProperti($id_lab)
     {
+        $whr = array(
+            'id_lab' => $id_lab,
+        );
+
+        $this->db->where($whr);
         $res = $this->db->get('properti');
         return $res;
     }
 
-    function CekProperti($id)
+    function CekProperti($nama)
     {
         $dat = array(
-            'id' => $id,
+            'nama_prop' => $nama,
         );
 
         $res = $this->db->get_where('properti', $dat);
         return $res;
     }
     
-    function TambahProperti($id, $x, $y)
+    function TambahProperti($nama, $x, $y, $id_lab)
     {
         $dat = array(
-            'id' => $id,
+            'nama_prop' => $nama,
             'xPos' => $x,
             'yPos' => $y,
+            'id_lab' => $id_lab,
         );
 
         $this->db->insert('properti',$dat);
         return $this->db->error();
     }
 
-    function UbahProperti($id, $x, $y)
+    function UbahProperti($nama, $x, $y)
     {
         $this->db->set('xPos', $x);
         $this->db->set('yPos', $y);
-        $this->db->where('id', $id);
+        $this->db->where('nama_prop', $nama);
         $this->db->update('properti');
         return $this->db->error();
     }

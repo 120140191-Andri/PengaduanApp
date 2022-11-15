@@ -10,6 +10,13 @@ Class lab_model extends CI_Model
         return $res;
     }
 
+    function AmbilNamaLab($id)
+    {
+        $this->db->where('id', $id);
+        $res = $this->db->get('lab')->result();
+        return $res[0]->nama_lab;
+    }
+
     function AmbilLabWhr($id)
     {
         $dat = array(

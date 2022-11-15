@@ -40,14 +40,20 @@
 	<table class="table table-striped display" id="mydata">
 		<thead>
 			<tr>
+				<th>No</th>
 				<th>Nama Lab</th>
 				<th>Kepala Lab</th>
 				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody id="show_data">
-			<?php foreach ($lab as $row){ ?>
+			<?php 
+				$i = 0;
+				foreach ($lab as $row){ 
+				$i++;
+			?>
 			<tr>
+				<td><?php echo $i; ?></td>
 				<td><?php echo $row->nama_lab; ?></td>
 				<td><?php echo $row->nama != null ? $row->nama : 'Belum Ditentukan'; ?></td>
 				<td><a href="<?= base_url('Rt/Ubah_Lab/'.$row->id_lab) ?>">Ubah</a></td>

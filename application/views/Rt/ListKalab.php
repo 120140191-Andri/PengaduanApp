@@ -40,14 +40,20 @@
 	<table class="table table-striped display" id="mydata">
 		<thead>
 			<tr>
+				<th>No</th>
 				<th>Nama</th>
 				<th>Email</th>
 				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody id="show_data">
-			<?php foreach ($kalab as $row){ ?>
+			<?php 
+				$i = 0;
+				foreach ($kalab as $row){ 
+				$i++;
+			?>
 			<tr>
+				<td><?php echo $i; ?></td>
 				<td><?php echo $row->nama; ?></td>
 				<td><?php echo $row->email; ?></td>
 				<td>

@@ -8,6 +8,7 @@ class Kalab extends CI_Controller {
         parent::__construct();
         $this->load->model('properti_model');
 		$this->load->model('users_model');
+        $this->load->model('lab_model');
 
         if($this->session->userdata('is_login') == TRUE){
             if($this->session->userdata('id') != ''){
@@ -16,6 +17,17 @@ class Kalab extends CI_Controller {
                   redirect('/Rt');
               }elseif($this->session->userdata('r') == 'kalab'){
                   
+                $idu = $this->session->userdata('id');
+                $dat = $this->users_model->AmbilUserWhr($idu)->result();
+
+                if($dat[0]->id_lab == 0){
+                    redirect('/Login/logout');
+                }
+
+                if($dat[0]->id_lab != $this->session->userdata('id_lab')){
+                    redirect('/Login/logout');
+                }
+
               }elseif($this->session->userdata('r') == 'teknisi'){
                   redirect('/Teknisi');
               }else{
@@ -100,5 +112,46 @@ class Kalab extends CI_Controller {
         $res = $this->users_model->HapusTeknisi($id);
         redirect('Kalab/List_Teknisi');
     }
+
+    public function Manage_lab(){
+        $this->load->helper('url');
+		if($this->session->userdata('id_lab') == 0){
+			$this->load->view('Kalab/labkosong');
+		}else{
+            $id_lab = $this->session->userdata('id_lab');
+
+            $dats['id_lab'] = $id_lab;
+            $dats['nama_lab'] = $this->lab_model->AmbilNamaLab($id_lab);
+			$this->load->view('Kalab/Manage_Lab', $dats);
+		}
+    }
+
+    public function ambil_properti(){
+        $id_lab = $this->input->post('id_lab');
+		$res = $this->properti_model->AmbilProperti($id_lab)->result();
+		echo json_encode($res);
+	}
+
+	public function tambah_properti(){
+		$nama = $this->input->post('nama_prop');
+		$x = $this->input->post('xPos');
+		$y = $this->input->post('yPos');
+        $id_lab = $this->input->post('id_lab');
+		$cek = count($this->properti_model->CekProperti($nama)->result());
+		if($cek == 0){
+			$res = $this->properti_model->TambahProperti($nama, $x, $y, $id_lab);
+			var_dump($res);
+		}else{
+			echo 'ada';
+		}
+	}
+
+	public function ubah_properti(){
+		$nama = $this->input->post('nama_prop');
+		$x = $this->input->post('xPos');
+		$y = $this->input->post('yPos');
+		$res = $this->properti_model->UbahProperti($nama, $x, $y);
+		var_dump($res);
+	}
 
 }
