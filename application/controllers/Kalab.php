@@ -9,6 +9,7 @@ class Kalab extends CI_Controller {
         $this->load->model('properti_model');
 		$this->load->model('users_model');
         $this->load->model('lab_model');
+        $this->load->model('laporan_model');
 
         if($this->session->userdata('is_login') == TRUE){
             if($this->session->userdata('id') != ''){
@@ -201,6 +202,35 @@ class Kalab extends CI_Controller {
 
         redirect('Kalab/');
 
+    }
+
+    function list_laporan()
+    {
+        $this->load->helper('url');
+
+        $filter = $this->input->post('filter');
+
+        if($filter != null){
+
+            if($filter == 'Diproses'){
+                $dat['laporan'] = $this->laporan_model->TampilLaporanProses()->result();
+                $dat['fil'] = 'proses';
+            }elseif($filter == 'Selesai'){
+                $dat['laporan'] = $this->laporan_model->TampilLaporanSelesai()->result();
+                $dat['fil'] = 'end';
+            }else{
+                $dat['laporan'] = $this->laporan_model->TampilLaporanSemua()->result();
+                $dat['fil'] = 'all';
+            }
+
+        }else{
+            $dat['laporan'] = $this->laporan_model->TampilLaporanSemua()->result();
+            $dat['fil'] = 'all';
+        }
+
+        // var_dump($dat);
+        // die;
+        $this->load->view('Kalab/List_Laporan', $dat);
     }
 
 }
