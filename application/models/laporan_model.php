@@ -111,6 +111,23 @@ Class laporan_model extends CI_Model
         return $res;
     }
 
+    function TampilLaporanProsesRT()
+    {
+        $dat = array(
+            'laporan.status' => 'diproses',
+        );
+
+        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->from('laporan');
+        $this->db->join('properti', 'properti.id = laporan.id_prop');
+        $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->join('lab', 'lab.id = properti.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
     function TampilLaporanSelesai()
     {
         $dat = array(
@@ -127,12 +144,41 @@ Class laporan_model extends CI_Model
         return $res;
     }
 
+    function TampilLaporanSelesaiRT()
+    {
+        $dat = array(
+            'laporan.status' => 'selesai',
+        );
+
+        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->from('laporan');
+        $this->db->join('properti', 'properti.id = laporan.id_prop');
+        $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->join('lab', 'lab.id = properti.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
     function TampilLaporanSemua()
     {
         $this->db->select('*, laporan.created_at AS tgl_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->order_by('laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TampilLaporanSemuaRT()
+    {
+        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->from('laporan');
+        $this->db->join('properti', 'properti.id = laporan.id_prop');
+        $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->join('lab', 'lab.id = properti.id_lab');
         $this->db->order_by('laporan.id', 'DESC');
         $res = $this->db->get();
         return $res;

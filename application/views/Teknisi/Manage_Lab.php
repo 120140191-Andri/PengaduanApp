@@ -28,6 +28,12 @@
     </ul>
 	<hr>
 
+	<input type="text" id="nama">
+	<div id="tambah">Tambah</div>
+
+	<div id="posX"></div>
+	<div id="posY"></div>
+
 	<div class="kontainer-atur"></div>
 </body>
 

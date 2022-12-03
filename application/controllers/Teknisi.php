@@ -169,4 +169,26 @@ class Teknisi extends CI_Controller {
 
     }
 
+	public function tambah_properti(){
+		$nama = $this->input->post('nama_prop');
+		$x = $this->input->post('xPos');
+		$y = $this->input->post('yPos');
+        $id_lab = $this->input->post('id_lab');
+		$cek = count($this->properti_model->CekProperti($nama)->result());
+		if($cek == 0){
+			$res = $this->properti_model->TambahProperti($nama, $x, $y, $id_lab);
+			var_dump($res);
+		}else{
+			echo 'ada';
+		}
+	}
+
+	public function ubah_properti(){
+		$nama = $this->input->post('nama_prop');
+		$x = $this->input->post('xPos');
+		$y = $this->input->post('yPos');
+		$res = $this->properti_model->UbahProperti($nama, $x, $y);
+		var_dump($res);
+	}
+
 }

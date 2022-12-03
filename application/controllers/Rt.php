@@ -9,6 +9,7 @@ class Rt extends CI_Controller {
         $this->load->model('properti_model');
         $this->load->model('lab_model');
         $this->load->model('users_model');
+        $this->load->model('laporan_model');
 
         if($this->session->userdata('is_login') == TRUE){
             if($this->session->userdata('id') != ''){
@@ -198,6 +199,35 @@ class Rt extends CI_Controller {
 
         redirect('Rt/');
 
+    }
+
+    function list_laporan()
+    {
+        $this->load->helper('url');
+
+        $filter = $this->input->post('filter');
+
+        if($filter != null){
+
+            if($filter == 'Diproses'){
+                $dat['laporan'] = $this->laporan_model->TampilLaporanProsesRT()->result();
+                $dat['fil'] = 'proses';
+            }elseif($filter == 'Selesai'){
+                $dat['laporan'] = $this->laporan_model->TampilLaporanSelesaiRT()->result();
+                $dat['fil'] = 'end';
+            }else{
+                $dat['laporan'] = $this->laporan_model->TampilLaporanSemuaRT()->result();
+                $dat['fil'] = 'all';
+            }
+
+        }else{
+            $dat['laporan'] = $this->laporan_model->TampilLaporanSemuaRT()->result();
+            $dat['fil'] = 'all';
+        }
+
+        // var_dump($dat);
+        // die;
+        $this->load->view('Rt/List_Laporan', $dat);
     }
 
 }
