@@ -233,4 +233,62 @@ class Kalab extends CI_Controller {
         $this->load->view('Kalab/List_Laporan', $dat);
     }
 
+    function TTD_laporan()
+    {
+        $this->load->helper('url');
+
+        $filter = $this->input->post('filter');
+
+        if($filter != null){
+
+            if($filter == 'dikirim'){
+                $dat['laporan'] = $this->laporan_model->TampilTTDLaporanProses()->result();
+                $dat['fil'] = 'dikirim';
+            }elseif($filter == 'dibalas'){
+                $dat['laporan'] = $this->laporan_model->TampilTTDLaporanSelesai()->result();
+                $dat['fil'] = 'dibalas';
+            }else{
+                $dat['laporan'] = $this->laporan_model->TampilTTDLaporanSemua()->result();
+                $dat['fil'] = 'all';
+            }
+
+        }else{
+            $dat['laporan'] = $this->laporan_model->TampilTTDLaporanSemua()->result();
+            $dat['fil'] = 'all';
+        }
+
+        // var_dump($dat);
+        // die;
+        $this->load->view('Kalab/List_TTD_Laporan', $dat);
+    }
+
+    public function balas_TTD($id){
+        $this->load->helper('url');
+
+        $dat['id'] = $id;
+        // var_dump($dat);
+        // die;
+        $this->load->view('Kalab/Balas_TTD', $dat);
+    }
+
+    public function sys_balas_TTD(){
+        $id = $this->input->post('id');
+
+        $config['upload_path'] = './assets/foto/';
+        $config['allowed_types'] = 'gif|jpg|png';
+		$image = $_FILES['file']['tmp_name'];
+
+        $this->load->library('upload', $config);
+		$nama = './assets/dokumen/' . $_FILES['file']['name'];
+
+        if (move_uploaded_file($image,$nama)) {
+            $namaFile = $_FILES['file']['name'];
+			$this->laporan_model->BalasTTD($id, $namaFile);
+			redirect('Kalab/TTD_Laporan');
+        } else {
+			// redirect('Kalab/TTD_Laporan');
+        }
+        
+    }
+
 }

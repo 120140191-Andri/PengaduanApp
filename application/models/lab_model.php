@@ -1,6 +1,12 @@
 <?php
 Class lab_model extends CI_Model
 {
+    function AmbilSemuaLab()
+    {
+        $res = $this->db->get('lab');
+        return $res;
+    }
+
     function AmbilLab()
     {
         $this->db->select('*, lab.id AS id_lab');

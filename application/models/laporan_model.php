@@ -128,6 +128,37 @@ Class laporan_model extends CI_Model
         return $res;
     }
 
+    function TampilTTDLaporanProsesRT()
+    {
+        $dat = array(
+            'ttd_laporan.status' => 'dikirim',
+        );
+
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TampilTTDLaporanProses()
+    {
+        $dat = array(
+            'ttd_laporan.status' => 'dikirim',
+            'lab.id' => $this->session->userdata('id_lab'),
+        );
+
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
     function TampilLaporanSelesai()
     {
         $dat = array(
@@ -161,6 +192,37 @@ Class laporan_model extends CI_Model
         return $res;
     }
 
+    function TampilTTDLaporanSelesaiRT()
+    {
+        $dat = array(
+            'ttd_laporan.status' => 'dibalas',
+        );
+
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TampilTTDLaporanSelesai()
+    {
+        $dat = array(
+            'ttd_laporan.status' => 'dibalas',
+            'lab.id' => $this->session->userdata('id_lab'),
+        );
+
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
     function TampilLaporanSemua()
     {
         $this->db->select('*, laporan.created_at AS tgl_laporan');
@@ -182,6 +244,58 @@ Class laporan_model extends CI_Model
         $this->db->order_by('laporan.id', 'DESC');
         $res = $this->db->get();
         return $res;
+    }
+
+    function TampilTTDLaporanSemuaRT()
+    {
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TampilTTDLaporanSemua()
+    {
+        $dat = array(
+            'lab.id' => $this->session->userdata('id_lab'),
+        );
+
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->from('ttd_laporan');
+        $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
+        $this->db->where($dat);
+        $this->db->order_by('ttd_laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TambahTTD($idlab, $pesan, $file)
+    {
+        $dat = array(
+            'pesan' => $pesan,
+            'id_lab' => $idlab,
+            'file_rt' => $file,
+        );
+
+        $this->db->insert('ttd_laporan',$dat);
+
+        return $this->db->error();
+    }
+
+    function BalasTTD($id, $file)
+    {
+        $dat = array(
+            'file_kaleb' => $file,
+            'status' => 'dibalas'
+        );
+
+        $this->db->set($dat);
+        $this->db->where('id', $id);
+        $this->db->update('ttd_laporan');
+
+        return $this->db->error();
     }
     
 }

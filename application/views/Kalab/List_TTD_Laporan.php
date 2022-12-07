@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RT - List Laporan</title>
+	<title>Kalab - List TTD Laporan</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
@@ -35,19 +35,19 @@
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
 	</ul>
 
-	<form action="<?= base_url('Rt/List_Laporan') ?>" method="post">
+	<form action="<?= base_url('Kalab/TTD_Laporan') ?>" method="post">
 		<select name="filter">
 			<?php if($fil == 'all'){ ?>
 			<option>Semua</option>
-			<option>Selesai</option>
-			<option>Diproses</option>
-			<?php } elseif($fil == 'proses') { ?>
-			<option>Diproses</option>
+			<option>dikirim</option>
+			<option>dibalas</option>
+			<?php } elseif($fil == 'dibalas') { ?>
+			<option>dibalas</option>
 			<option>Semua</option>
-			<option>Selesai</option>
-			<?php } elseif($fil == 'end') { ?>
-			<option>Selesai</option>
-			<option>Diproses</option>
+			<option>dikirim</option>
+			<?php } elseif($fil == 'dikirim') { ?>
+			<option>dikirim</option>
+			<option>dibalas</option>
 			<option>Semua</option>
 			<?php } ?>
 		</select>
@@ -74,13 +74,11 @@
 			<tr>
 				<th>No</th>
 				<th>Nama Lab</th>
-				<th>Nama Properti</th>
-				<th>Nama Teknisi</th>
-				<th>Nama Pelapor</th>
-				<th>NPM Pelapor</th>
-				<th>Masalah</th>
+				<th>Pesan</th>
+				<th>File dari RT</th>
+				<th>File Dari saya</th>
+				<th>Status</th>
 				<th>Tanggal</th>
-				<th>Foto Bukti</th>
 			</tr>
 		</thead>
 		<tbody id="show_data">
@@ -92,13 +90,17 @@
 			<tr>
 				<td><?php echo $i; ?></td>
 				<td><?php echo $row->nama_lab; ?></td>
-				<td><?php echo $row->nama_prop; ?></td>
-				<td><?php echo $row->nama; ?></td>
-				<td><?php echo $row->nama_pelapor; ?></td>
-				<td><?php echo $row->npm; ?></td>
-				<td><?php echo $row->masalah; ?></td>
+				<td><?php echo $row->pesan; ?></td>
+				<td><a href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
+				<td>
+					<?php if($row->status == 'dibalas'){ ?>
+						<a href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
+					<?php }else{ ?>
+						<a href="<?= base_url('Kalab/balas_TTD/'.$row->id_ttd) ?>">Kirim Balasan</a>
+					<?php } ?>
+				</td>
+				<td><?php echo $row->status; ?></td>
 				<td><?php echo date('Y-m-d', strtotime($row->tgl_laporan)); ?></td>
-				<td><img src="<?= base_url('assets/foto/'. $row->foto_bukti) ?>" alt="" srcset=""></td>
 			</tr>
 			<?php } ?>
 		</tbody>
@@ -140,20 +142,7 @@ var minDate, maxDate;
 	 });
   
 	 // DataTables initialisation
-	 var table = $('#example').DataTable({
-		dom: 'Bfrtip',
-        buttons: [
-			{
-                extend: 'print',
-                exportOptions: {
-                    stripHtml : false,
-                    columns: [0, 1, 2, 3, 4, 5, 6] 
-                    //specify which column you want to print
- 
-                }
-        	}
-        ]
-	 });
+	 var table = $('#example').DataTable();
   
 	 // Refilter the table
 	 $('#min, #max').on('change', function () {

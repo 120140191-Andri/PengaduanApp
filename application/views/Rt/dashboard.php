@@ -21,6 +21,7 @@
         <li><a href="<?= base_url('Rt/List_lab') ?>">List Lab</a></li>
         <li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
 		<li><a href="<?= base_url('Rt/List_Laporan') ?>">List Laporan</a></li>
+		<li><a href="<?= base_url('Rt/TTD_Laporan') ?>">Tanda Tangan Laporan</a></li>
 		<li><a href="<?= base_url('Rt/Ganti_Password') ?>">Ganti Password</a></li>
 		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
     </ul>
