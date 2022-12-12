@@ -7,7 +7,7 @@
 	<title>jQuery UI Draggable - Default functionality</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -31,7 +31,7 @@
 							<label for="exampleInputPassword1">Password</label>
 							<input type="password" class="form-control form-control-sm" name="password">
 						</div>
-						<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>
+						<button type="submit" class="btn btn-primary btn-block btn-login-custom" value="Login">Login</button>
 					</form>
 					<div class="notif mt-3 pb-2 text-center">
 						<?php echo $this->session->flashdata('pesan'); ?>

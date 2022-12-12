@@ -38,6 +38,11 @@ class Rt extends CI_Controller {
 		$this->load->view('Rt/Dashboard');
 	}
 
+    public function tes(){
+        $this->load->helper('url');
+		$this->load->view('Rt/tes');
+    }
+
     public function List_lab(){
         $this->load->helper('url');
 
