@@ -17,7 +17,7 @@
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 
-	<?php include_once "tes.php";?>
+	<?php include_once "menu.php";?>
 
 	<!-- Page Content  -->
 	<div id="content">

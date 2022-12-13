@@ -7,6 +7,7 @@
 	<title>RT - Tambah TTD</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -19,24 +20,50 @@
 
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
+	<?php include_once "menu.php";?>
 
-	<ul>
-		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-	</ul>
+	<!-- Page Content  -->
+	<div id="content">
 
-    <form action="<?= base_url('Rt/sys_tambah_TTD') ?>" method="post" enctype="multipart/form-data">
-		<input type="text" name="pesan">
-        <select name="idlab">
-            <?php foreach($lab as $l){ ?>
-                <option value="<?php echo $l->id; ?>"><?php echo $l->nama_lab; ?>   </option>
-            <?php } ?>
-        </select> 
-		<br><br><br>
-		<label>File Surat</label>
-		<input type="file" name="file">
-        <input type="submit" value="Tambah">
-    </form>
+		<div class="container-fluid">
+
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Selamat datang di halaman Rumah Tangga</h2>
+			<form action="<?= base_url('Rt/sys_tambah_TTD') ?>" method="post" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-8">
+						<input type="text" name="pesan" class="form-control">
+					</div>
+					<div class="col-4">
+						<select name="idlab" class="form-control">
+							<?php foreach($lab as $l){ ?>
+							<option value="<?php echo $l->id; ?>"><?php echo $l->nama_lab; ?> </option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<br>
+				<label>File Surat</label><br>
+				<input type="file" name="file">
+				<br>
+				<input type="submit" value="Tambah Data" class="btn btn-primary btn-login-custom">
+			</form>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
+
+
 
 </body>
 

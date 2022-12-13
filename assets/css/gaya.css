@@ -124,7 +124,7 @@ form{
 	font-size: 13px;
 	margin-top:20px;
 }
-.btn-login-custom, .btn-login-custom:hover,.btn-login-custom:focus,.btn-login-custom:active {
+.btn-login-custom, .btn-login-custom:hover,.btn-login-custom:focus,.btn-login-custom:active  , .buttons-print{
 	background-color: #7386D5 !important;
 	padding: 15px;
 	outline: none !important;

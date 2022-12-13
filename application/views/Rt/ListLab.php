@@ -7,6 +7,7 @@
 	<title>RT - List Lab</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -17,7 +18,7 @@
 
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
-	
+
 	<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
@@ -27,54 +28,71 @@
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 
-	<ul>
-		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
-		<li><a href="<?= base_url('Rt/List_lab') ?>">List Lab</a></li>
-		<li><a href="<?= base_url('Rt/List_Kalab') ?>">List Ketua Lab</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-	</ul>
 
-    <a href="<?= base_url('Rt/Tambah_Lab') ?>">Tambah Lab</a>
-	<br><br><hr>
+	<?php include_once "menu.php";?>
 
-	<table class="table table-striped display" id="mydata">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Nama Lab</th>
-				<th>Kepala Lab</th>
-				<th>Aksi</th>
-			</tr>
-		</thead>
-		<tbody id="show_data">
-			<?php 
+	<!-- Page Content  -->
+	<div id="content">
+
+		<div class="container-fluid">
+
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Manajemen Data Lab</h2>
+			<a class="btn btn-primary btn-login-custom" href="<?= base_url('Rt/Tambah_Lab') ?>">Tambah Lab</a>
+			<br><br>
+			<hr>
+
+			<table class="table table-striped display" id="mydata">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Nama Lab</th>
+						<th>Kepala Lab</th>
+						<th>Aksi</th>
+					</tr>
+				</thead>
+				<tbody id="show_data">
+					<?php 
 				$i = 0;
 				foreach ($lab as $row){ 
 				$i++;
 			?>
-			<tr>
-				<td><?php echo $i; ?></td>
-				<td><?php echo $row->nama_lab; ?></td>
-				<td><?php echo $row->nama != null ? $row->nama : 'Belum Ditentukan'; ?></td>
-				<td><a href="<?= base_url('Rt/Ubah_Lab/'.$row->id_lab) ?>">Ubah</a></td>
-			</tr>
-			<?php } ?>
-		</tbody>
-	</table>
+					<tr>
+						<td><?php echo $i; ?></td>
+						<td><?php echo $row->nama_lab; ?></td>
+						<td><?php echo $row->nama != null ? $row->nama : 'Belum Ditentukan'; ?></td>
+						<td><a href="<?= base_url('Rt/Ubah_Lab/'.$row->id_lab) ?>">Ubah</a></td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
 
 </body>
 
 </html>
 
 <script>
-$(document).ready(function(){
-    $('#mydata').dataTable(
-	{
-		// dom: 'Bfrtip',
-        // buttons: [
-        //     'print',
-        // ]
-	}
-	);
-});
+	$(document).ready(function () {
+		$('#mydata').dataTable({
+			// dom: 'Bfrtip',
+			// buttons: [
+			//     'print',
+			// ]
+		});
+	});
+
 </script>
