@@ -41,7 +41,7 @@
 		<div class="container-fluid pt-4">
 			<h2>Manajemen Perangkat Lab</h2>
 			<br>
-			<input type="text" id="nama" class="form-control col-6" placeholder="tambah perangkat....">
+			<input type="text" id="nama" class="form-control col-md-6 col-12 pb-2" placeholder="tambah perangkat....">
 			<div class="btn btn-primary btn-login-custom" id="tambah">Tambah Perangkat</div>
 		
 

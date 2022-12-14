@@ -44,11 +44,11 @@
 			<form class="form-group" action="<?= base_url('Rt/sys_tambah_lab') ?>" method="post">
 
 			<div class="row">
-				<div class="col-8">
+				<div class="col-12 col-md-8 pb-4">
 					<input type="text" name="nama_lab" placeholder="nama lab" class="form-control">
 				</div>
 
-				<div class="col-4">
+				<div class="col-12 col-md-4 pb-4">
 					<select name="kalab" class="form-control">
 						<?php foreach($kalab as $l){ ?>
 						<option value="<?php echo $l->id; ?>"><?php echo $l->nama; ?> </option>

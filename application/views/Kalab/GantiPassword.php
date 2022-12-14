@@ -41,14 +41,14 @@
 			<h2>Pengaturan Password</h2>
 
 			<form class="form-group" action="<?= base_url('Kalab/sys_ganti_password') ?>" method="post">
-				<p class="">Isi password baru</p>
+			<h6>Masukkan Password Baru : </h6>
 				<div class="row">
-					<div class="col-6">
+				<div class="col-12 col-md-6 pb-3">
 						<input type="hidden" name="id" value="<?= $id ?>">
 						<input type="password" name="password" placeholder="Password baru..." class="form-control">
+						<input type="submit" value="Ubah Password" class="btn btn-primary btn-login-custom">
 					</div>
 				</div>
-				<input type="submit" value="Ubah Password" class="btn btn-primary btn-login-custom">
 			</form>
 
 			<div class="notif">

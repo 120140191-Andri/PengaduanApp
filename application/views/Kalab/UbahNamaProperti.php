@@ -42,7 +42,7 @@
 			<h2>Ubah Nama Perangkat</h2>
 			<form action="<?= base_url('Kalab/sys_ubah_nama_properti') ?>" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
-        <input type="text" name="nama_prop" placeholder="Nama" value="<?= $properti_n[0]->nama_prop ?>" class="form-control col-6">
+        <input type="text" name="nama_prop" placeholder="Nama" value="<?= $properti_n[0]->nama_prop ?>" class="form-control col-12 col-md-6 pb-2">
         <input type="submit" value="Ubah Perangkat" class="btn btn-primary btn-login-custom">
     </form>
 

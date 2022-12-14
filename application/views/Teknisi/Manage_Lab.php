@@ -7,6 +7,7 @@
 	<title>Teknisi - Manage Lab</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -20,21 +21,38 @@
 	<input id="id_lab" type="hidden" value="<?= $id_lab ?>">
 	<input id="nama_lab" type="hidden" value="<?= $nama_lab ?>">
 
-	<ul>
-		<li><a href="<?= base_url('Teknisi/') ?>">Dashboard</a></li>
-        <li><a href="<?= base_url('Teknisi/Manage_lab') ?>">Manage Lab</a></li>
-		<li><a href="<?= base_url('Teknisi/Ganti_Password') ?>">Ganti Password</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-    </ul>
-	<hr>
+	<?php include_once "menu.php";?>
 
-	<input type="text" id="nama">
-	<div id="tambah">Tambah</div>
+	<!-- Page Content  -->
+	<div id="content">
 
-	<div id="posX"></div>
-	<div id="posY"></div>
+		<div class="container-fluid">
 
-	<div class="kontainer-atur"></div>
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Manajemen Perangkat Lab</h2>
+			<br>
+			<input type="text" id="nama"  class="form-control col-6" placeholder="tambah perangkat....">
+			<div class="btn btn-primary btn-login-custom" id="tambah">Tambah</div>
+
+			<div id="posX"></div>
+			<div id="posY"></div>
+
+			<div class="kontainer-atur"></div>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
+
 </body>
 
 </html>

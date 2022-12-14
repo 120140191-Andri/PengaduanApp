@@ -19,20 +19,12 @@
 		</div>
 
 		<ul class="list-unstyled components">
-			<li><a href="<?= base_url('Kalab/') ?>"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
-			<li><a href="<?= base_url('Kalab/Manage_lab') ?>"><i class="fas fa-cog mr-2"></i>Manage Lab</a></li>
-			<li><a href="<?= base_url('Kalab/List_Teknisi') ?>"><i class="fas fa-clipboard-list mr-2"></i>List
-					Teknisi</a></li>
-			<li><a href="<?= base_url('Kalab/List_Laporan') ?>"><i class="fas fa-folder-open mr-2"></i>List Laporan</a>
-			</li>
-			<li><a href="<?= base_url('Kalab/TTD_Laporan') ?>"><i class="fas fa-file-medical-alt mr-2"></i>Tanda Tangan
-					Laporan</a></li>
-			<li><a href="<?= base_url('Kalab/Ganti_Password') ?>"><i class="fas fa-key mr-2"></i>Ganti Password</a></li>
+			<li><a href="<?= base_url('Teknisi/') ?>"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
+			<li><a href="<?= base_url('Teknisi/Manage_lab') ?>"><i class="fas fa-cog mr-2"></i>Manage Lab</a></li>
+			<li><a href="<?= base_url('Teknisi/Ganti_Password') ?>"><i class="fas fa-key mr-2"></i>Ganti Password</a></li>
 			<li><a href="<?= base_url('Login/logout') ?>"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
 		</ul>
 	</nav>
-
-
 
 	<!-- Popper.JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"

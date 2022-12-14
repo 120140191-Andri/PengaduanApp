@@ -41,10 +41,12 @@
 			<h2>Tambah Data Laporan - Tanda Tangan</h2>
 			<form action="<?= base_url('Rt/sys_tambah_TTD') ?>" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<div class="col-8">
+					<div class="col-md-8 col-12 pb-4">
+						<h6>Pesan Data Laporan : </h6>
 						<input type="text" name="pesan" class="form-control">
 					</div>
-					<div class="col-4">
+					<div class="col-md-4 col-12 pb-4">
+						<h6>Tempat Data Laporan : </h6>
 						<select name="idlab" class="form-control">
 							<?php foreach($lab as $l){ ?>
 							<option value="<?php echo $l->id; ?>"><?php echo $l->nama_lab; ?> </option>

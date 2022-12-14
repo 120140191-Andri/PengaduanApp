@@ -41,8 +41,8 @@
 		<div class="container-fluid pt-4">
 			<h2>Tambah Data Teknisi</h2>
 			<form class="form-group" action="<?= base_url('Kalab/sys_tambah_teknisi') ?>" method="post">
-				<input type="text" name="nama" placeholder="Nama" class="form-control col-6 mb-3">
-				<input type="email" name="email" placeholder="Email" class="form-control col-6 mb-3">
+				<input type="text" name="nama" placeholder="Nama" class="form-control col-12 col-md-6 mb-3">
+				<input type="email" name="email" placeholder="Email" class="form-control col-12 col-md-6 mb-3">
 				<label>*Password Default adalah: 1234, beritahu Pengguna segera ganti password setelah mendapatkan akun</label>
 				<br>
 				<input type="submit" value="Tambah Data" class="btn btn-primary btn-login-custom">

@@ -42,8 +42,8 @@
 			<h2>Ubah Data Teknisi</h2>
 			<form class="form-group" action="<?= base_url('Kalab/sys_ubah_teknisi') ?>" method="post">
 				<input type="hidden" name="id" value="<?= $id ?>">
-				<input type="text" name="nama" placeholder="Nama" class="form-control col-6 mb-3" value="<?= $user_n[0]->nama ?>">
-				<input type="email" name="email" placeholder="Email" class="form-control col-6 mb-3" value="<?= $user_n[0]->email ?>">
+				<input type="text" name="nama" placeholder="Nama" class="form-control col-12 col-md-6 mb-3" value="<?= $user_n[0]->nama ?>">
+				<input type="email" name="email" placeholder="Email" class="form-control col-12 col-md-6 mb-3" value="<?= $user_n[0]->email ?>">
 				<input type="submit" value="Ubah Data" class="btn btn-primary btn-login-custom">
 			</form>
 
