@@ -49,8 +49,6 @@
 						<input type="submit" value="Ubah Password" class="btn btn-primary btn-login-custom">
 					</div>
 				</div>
-
-
 			</form>
 
 			<div class="notif">

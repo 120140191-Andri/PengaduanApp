@@ -27,7 +27,6 @@
 	<div id="content">
 
 		<div class="container-fluid">
-
 			<button type="button" id="sidebarCollapse" class="btn btn-info">
 				<i class="fas fa-align-left"></i>
 
@@ -40,19 +39,19 @@
 		</div>
 		<div class="container-fluid pt-4">
 			<h2>Pengaturan Password</h2>
-			<div class="row">
+			<form class="form-group" action="<?= base_url('Teknisi/sys_ganti_password') ?>" method="post">
 				<h6>Masukkan Password Baru : </h6>
-				<div class="col-12 col-md-6 pb-3">
-					<form class="form-group" action="<?= base_url('Teknisi/sys_ganti_password') ?>" method="post">
+				<div class="row">
+					<div class="col-12 col-md-6 pb-3">
 						<input type="hidden" name="id" value="<?= $id ?>">
-						<input type="password" name="password" placeholder="Password Baru..." class="form-control">
+						<input type="password" name="password" placeholder="Password baru..." class="form-control">
 						<input type="submit" value="Ubah Password" class="btn btn-primary btn-login-custom">
-					</form>
-
-					<div class="notif">
-						<?php echo $this->session->flashdata('pesan'); ?>
 					</div>
 				</div>
+			</form>
+
+			<div class="notif">
+				<?php echo $this->session->flashdata('pesan'); ?>
 			</div>
 		</div>
 	</div>
