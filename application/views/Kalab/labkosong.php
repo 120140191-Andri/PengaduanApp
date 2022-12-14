@@ -7,6 +7,7 @@
 	<title>jQuery UI Draggable - Default functionality</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -15,13 +16,30 @@
 
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
-	
-    <h5>Anda belum mendapatkan akses lab, silahkan minta kepada admin RT lalu logout dan login kembali</h5>
 
-    <ul>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-    </ul>
+	<?php include_once "menu.php";?>
 
+	<!-- Page Content  -->
+	<div id="content">
+
+		<div class="container-fluid">
+
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+		<h5>Anda belum mendapatkan akses lab, silahkan minta kepada admin RT lalu logout dan login kembali</h5>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
 </body>
 
 </html>

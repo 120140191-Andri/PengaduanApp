@@ -7,6 +7,7 @@
 	<title>Kalab - Ubah Nama Properti</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -20,22 +21,39 @@
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 
-	<ul>
-		<li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
-        <li><a href="<?= base_url('Kalab/Manage_lab') ?>">Manage Lab</a></li>
-        <li><a href="<?= base_url('Kalab/List_Teknisi') ?>">List Teknisi</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-	</ul>
+	<?php include_once "menu.php";?>
 
-    <form action="<?= base_url('Kalab/sys_ubah_nama_properti') ?>" method="post">
+	<!-- Page Content  -->
+	<div id="content">
+
+		<div class="container-fluid">
+
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Ubah Nama Perangkat</h2>
+			<form action="<?= base_url('Kalab/sys_ubah_nama_properti') ?>" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
-        <input type="text" name="nama_prop" placeholder="Nama" value="<?= $properti_n[0]->nama_prop ?>">
-        <input type="submit" value="Ubah">
+        <input type="text" name="nama_prop" placeholder="Nama" value="<?= $properti_n[0]->nama_prop ?>" class="form-control col-6">
+        <input type="submit" value="Ubah Perangkat" class="btn btn-primary btn-login-custom">
     </form>
 
     <div class="notif">
         <?php echo $this->session->flashdata('pesan'); ?>
     </div>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
+   
 
 </body>
 

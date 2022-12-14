@@ -59,9 +59,5 @@
 	</div>
 	<!-- Page Content -->
 	</div>
-
-
-
 </body>
-
 </html>

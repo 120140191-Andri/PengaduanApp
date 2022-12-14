@@ -7,6 +7,7 @@
 	<title>Kalab - List Teknisi</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -17,7 +18,7 @@
 
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
-	
+
 	<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
@@ -27,58 +28,73 @@
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
 
-	<ul>
-        <li><a href="<?= base_url('Kalab/') ?>">Dashboard</a></li>
-        <li><a href="<?= base_url('Kalab/Manage_lab') ?>">Manage Lab</a></li>
-        <li><a href="<?= base_url('Kalab/List_Teknisi') ?>">List Teknisi</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-	</ul>
+	<?php include_once "menu.php";?>
 
-    <a href="<?= base_url('Kalab/Tambah_Teknisi') ?>">Tambah Teknisi</a>
-	<br><br><hr>
+	<!-- Page Content  -->
+	<div id="content">
 
-	<table class="table table-striped display" id="mydata">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Nama</th>
-				<th>Email</th>
-				<th>Aksi</th>
-			</tr>
-		</thead>
-		<tbody id="show_data">
-			<?php 
+		<div class="container-fluid">
+
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
+
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Selamat datang di halaman Kepala Lab</h2>
+			<a class="btn btn-primary btn-login-custom" href="<?= base_url('Kalab/Tambah_Teknisi') ?>">Tambah Data Teknisi</a>
+			<br><br>
+			<hr>
+
+			<table class="table table-striped display" id="mydata">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Nama</th>
+						<th>Email</th>
+						<th>Aksi</th>
+					</tr>
+				</thead>
+				<tbody id="show_data">
+					<?php 
 			$i = 0;
 			foreach ($teknisi as $row){ 
 			$i++;
 			?>
-			<tr>
-				<td><?php echo $i; ?></td>
-				<td><?php echo $row->nama; ?></td>
-				<td><?php echo $row->email; ?></td>
-				<td>
-					<a href="<?= base_url('Kalab/Ubah_Teknisi/'.$row->id) ?>">Ubah</a>
-					|
-					<a href="<?= base_url('Kalab/sys_hapus_teknisi/'.$row->id) ?>">Hapus</a>
-				</td>
-			</tr>
-			<?php } ?>
-		</tbody>
-	</table>
-
+					<tr>
+						<td><?php echo $i; ?></td>
+						<td><?php echo $row->nama; ?></td>
+						<td><?php echo $row->email; ?></td>
+						<td>
+							<a href="<?= base_url('Kalab/Ubah_Teknisi/'.$row->id) ?>">Ubah</a>
+							|
+							<a href="<?= base_url('Kalab/sys_hapus_teknisi/'.$row->id) ?>">Hapus</a>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
 </body>
 
 </html>
 
 <script>
-$(document).ready(function(){
-    $('#mydata').dataTable(
-	{
-		// dom: 'Bfrtip',
-        // buttons: [
-        //     'print',
-        // ]
-	}
-	);
-});
+	$(document).ready(function () {
+		$('#mydata').dataTable({
+			// dom: 'Bfrtip',
+			// buttons: [
+			//     'print',
+			// ]
+		});
+	});
+
 </script>

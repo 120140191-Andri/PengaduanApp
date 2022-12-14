@@ -7,6 +7,7 @@
 	<title>Kalab - List TTD Laporan</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/gaya.css') ?>">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -29,124 +30,149 @@
 
 <body>
 	<input id="baseurl" type="hidden" value="<?= base_url() ?>">
+	<?php include_once "menu.php";?>
 
-	<ul>
-		<li><a href="<?= base_url('Rt/') ?>">Dashboard</a></li>
-		<li><a href="<?= base_url('Login/logout') ?>">Logout</a></li>
-	</ul>
+	<!-- Page Content  -->
+	<div id="content">
 
-	<form action="<?= base_url('Kalab/TTD_Laporan') ?>" method="post">
-		<select name="filter">
-			<?php if($fil == 'all'){ ?>
-			<option>Semua</option>
-			<option>dikirim</option>
-			<option>dibalas</option>
-			<?php } elseif($fil == 'dibalas') { ?>
-			<option>dibalas</option>
-			<option>Semua</option>
-			<option>dikirim</option>
-			<?php } elseif($fil == 'dikirim') { ?>
-			<option>dikirim</option>
-			<option>dibalas</option>
-			<option>Semua</option>
-			<?php } ?>
-		</select>
-		<input type="submit" value="Filter Status">
-	</form>
-	<br><br>
-	<hr>
+		<div class="container-fluid">
 
-	<table border="0" cellspacing="5" cellpadding="5">
-		<tbody>
-			<tr>
-				<td>Mulai Tanggal:</td>
-				<td><input type="text" id="min" name="min"></td>
-			</tr>
-			<tr>
-				<td>Sampai Tanggal:</td>
-				<td><input type="text" id="max" name="max"></td>
-			</tr>
-		</tbody>
-	</table>
+			<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<i class="fas fa-align-left"></i>
 
-	<table class="table table-striped display" id="example">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Nama Lab</th>
-				<th>Pesan</th>
-				<th>File dari RT</th>
-				<th>File Dari saya</th>
-				<th>Status</th>
-				<th>Tanggal</th>
-			</tr>
-		</thead>
-		<tbody id="show_data">
-			<?php 
+			</button>
+			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-align-justify"></i>
+			</button>
+		</div>
+		<div class="container-fluid pt-4">
+			<h2>Manajemen Data Tanda Tangan - Laporan</h2>
+			<form class="form-group" action="<?= base_url('Kalab/TTD_Laporan') ?>" method="post">
+				<div class="row">
+					<div class="col-6">
+						<select name="filter" class="form-control">
+							<?php if($fil == 'all'){ ?>
+							<option>Semua</option>
+							<option>dikirim</option>
+							<option>dibalas</option>
+							<?php } elseif($fil == 'dibalas') { ?>
+							<option>dibalas</option>
+							<option>Semua</option>
+							<option>dikirim</option>
+							<?php } elseif($fil == 'dikirim') { ?>
+							<option>dikirim</option>
+							<option>dibalas</option>
+							<option>Semua</option>
+							<?php } ?>
+						</select>
+						<input type="submit" value="Filter Status" class="btn btn-primary btn-login-custom">
+					</div>
+				</div>
+			</form>
+			<br><br>
+			<hr class=" mt-0 pb-4">
+
+			<h5 class="pb-2">Periode Tanggal Laporan</h5>
+
+			<table border="0"  class="form-group">
+				<tbody>
+					<tr>
+						<td>Mulai Tanggal:</td>
+						<td><input type="text" id="min" name="min" class="form-control"></td>
+					</tr>
+					<br>
+					<tr>
+						<td>Sampai Tanggal:&nbsp;</td>
+						<td><input type="text" id="max" name="max" class="form-control"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table table-striped display" id="example">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Nama Lab</th>
+						<th>Pesan</th>
+						<th>File dari RT</th>
+						<th>File Dari saya</th>
+						<th>Status</th>
+						<th>Tanggal</th>
+					</tr>
+				</thead>
+				<tbody id="show_data">
+					<?php 
 			$i = 0;
 			foreach ($laporan as $row){ 
 			$i++;
 			?>
-			<tr>
-				<td><?php echo $i; ?></td>
-				<td><?php echo $row->nama_lab; ?></td>
-				<td><?php echo $row->pesan; ?></td>
-				<td><a href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
-				<td>
-					<?php if($row->status == 'dibalas'){ ?>
-						<a href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
-					<?php }else{ ?>
-						<a href="<?= base_url('Kalab/balas_TTD/'.$row->id_ttd) ?>">Kirim Balasan</a>
+					<tr>
+						<td><?php echo $i; ?></td>
+						<td><?php echo $row->nama_lab; ?></td>
+						<td><?php echo $row->pesan; ?></td>
+						<td><a href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
+						<td>
+							<?php if($row->status == 'dibalas'){ ?>
+							<a href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
+							<?php }else{ ?>
+							<a href="<?= base_url('Kalab/balas_TTD/'.$row->id_ttd) ?>">Kirim Balasan</a>
+							<?php } ?>
+						</td>
+						<td><?php echo $row->status; ?></td>
+						<td><?php echo date('Y-m-d', strtotime($row->tgl_laporan)); ?></td>
+					</tr>
 					<?php } ?>
-				</td>
-				<td><?php echo $row->status; ?></td>
-				<td><?php echo date('Y-m-d', strtotime($row->tgl_laporan)); ?></td>
-			</tr>
-			<?php } ?>
-		</tbody>
-	</table>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Page Content -->
+	</div>
 
 </body>
 
 </html>
 
 <script>
-var minDate, maxDate;
- 
- // Custom filtering function which will search data in column four between two values
- $.fn.dataTable.ext.search.push(
-	 function( settings, data, dataIndex ) {
-		 var min = minDate.val();
-		 var max = maxDate.val();
-		 var date = new Date( data[6] );
-  
-		 if (
-			 ( min === null && max === null ) ||
-			 ( min === null && date <= max ) ||
-			 ( min <= date   && max === null ) ||
-			 ( min <= date   && date <= max )
-		 ) {
-			 return true;
-		 }
-		 return false;
-	 }
- );
-  
- $(document).ready(function() {
-	 // Create date inputs
-	 minDate = new DateTime($('#min'), {
-		 format: 'MMMM Do YYYY'
-	 });
-	 maxDate = new DateTime($('#max'), {
-		 format: 'MMMM Do YYYY'
-	 });
-  
-	 // DataTables initialisation
-	 var table = $('#example').DataTable();
-  
-	 // Refilter the table
-	 $('#min, #max').on('change', function () {
-		 table.draw();
-	 });
- });
+	var minDate, maxDate;
+
+	// Custom filtering function which will search data in column four between two values
+	$.fn.dataTable.ext.search.push(
+		function (settings, data, dataIndex) {
+			var min = minDate.val();
+			var max = maxDate.val();
+			var date = new Date(data[6]);
+
+			if (
+				(min === null && max === null) ||
+				(min === null && date <= max) ||
+				(min <= date && max === null) ||
+				(min <= date && date <= max)
+			) {
+				return true;
+			}
+			return false;
+		}
+	);
+
+	$(document).ready(function () {
+		// Create date inputs
+		minDate = new DateTime($('#min'), {
+			format: 'MMMM Do YYYY'
+		});
+		maxDate = new DateTime($('#max'), {
+			format: 'MMMM Do YYYY'
+		});
+
+		// DataTables initialisation
+		var table = $('#example').DataTable();
+
+		// Refilter the table
+		$('#min, #max').on('change', function () {
+			table.draw();
+		});
+	});
+
 </script>

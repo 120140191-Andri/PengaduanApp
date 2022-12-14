@@ -130,6 +130,11 @@ form{
 	outline: none !important;
 	border:none !important;
 	box-shadow:none !important;
+
+}
+.buttons-print {
+	margin-top: 30px !important;
+	color:#fff !important;
 }
 /* login page */
 

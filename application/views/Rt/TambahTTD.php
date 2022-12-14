@@ -38,7 +38,7 @@
 			</button>
 		</div>
 		<div class="container-fluid pt-4">
-			<h2>Selamat datang di halaman Rumah Tangga</h2>
+			<h2>Tambah Data Laporan - Tanda Tangan</h2>
 			<form action="<?= base_url('Rt/sys_tambah_TTD') ?>" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-8">
