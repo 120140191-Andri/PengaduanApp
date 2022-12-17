@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery UI Draggable - Default functionality</title>
+	<title>Login - Aplikasi Pengaduan Fasilitas Lab</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap/bootstrap.min.css') ?>">
@@ -20,6 +20,9 @@
 	<div class="global-container">
 		<div class="card login-form">
 			<div class="card-body">
+				<p class="text-center pt-3 pb-3">
+				<img src="<?= base_url('assets/foto/logo-polinela.png') ?>" alt="" width="120" height="120" srcset="">
+				</p>
 				<h3 class="card-title text-center font-weight-bold">Silahkan Login</h3>
 				<div class="card-text">
 					<form action="<?= base_url('/Login/cek_login') ?>" method="post">
