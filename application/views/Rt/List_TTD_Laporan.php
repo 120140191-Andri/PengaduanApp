@@ -120,12 +120,12 @@
 						<td><?php echo $i; ?></td>
 						<td><?php echo $row->nama_lab; ?></td>
 						<td><?php echo $row->pesan; ?></td>
-						<td><a href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
+						<td><a class="btn btn-success mt-1 mb-1" href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
 						<td>
 							<?php if($row->status == 'dibalas'){ ?>
-							<a href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
+							<a class="btn btn-success mt-1 mb-1" href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
 							<?php }else{ ?>
-							menunggu balasan
+							<p class="pt-2 waiting-text">menunggu balasan</p>
 							<?php } ?>
 						</td>
 						<td><?php echo $row->status; ?></td>

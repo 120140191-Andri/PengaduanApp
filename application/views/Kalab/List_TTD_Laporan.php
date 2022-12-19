@@ -112,12 +112,12 @@
 						<td><?php echo $i; ?></td>
 						<td><?php echo $row->nama_lab; ?></td>
 						<td><?php echo $row->pesan; ?></td>
-						<td><a href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
+						<td><a class="btn btn-success mt-1 mb-1" href="<?= base_url('assets/dokumen/'.$row->file_rt) ?>">Download</a></td>
 						<td>
 							<?php if($row->status == 'dibalas'){ ?>
-							<a href="<?= base_url('assets/dokumen/'.$row->file_kaleb) ?>">Download</a>
+							<a class="btn btn-success mt-1 mb-1" href="<?= base_url('assets/dokumen/'.$row->file_kaleb)?>">Download</a>
 							<?php }else{ ?>
-							<a href="<?= base_url('Kalab/balas_TTD/'.$row->id_ttd) ?>">Kirim Balasan</a>
+							<a class="btn btn-primary mt-1 mb-1" href="<?= base_url('Kalab/balas_TTD/'.$row->id_ttd) ?>">Kirim Balasan</a>
 							<?php } ?>
 						</td>
 						<td><?php echo $row->status; ?></td>
