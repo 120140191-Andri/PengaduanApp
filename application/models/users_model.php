@@ -19,6 +19,7 @@ Class users_model extends CI_Model
                     'id'       => $res[0]->id,
                     'r'        => $res[0]->role,
                     'id_lab'   => $res[0]->id_lab,
+                    'nama_user'=> $res[0]->nama
                 );
              
                 $this->session->set_userdata($data_login);

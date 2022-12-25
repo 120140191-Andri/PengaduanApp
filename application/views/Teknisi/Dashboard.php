@@ -35,7 +35,7 @@
 			</button>
 		</div>
 		<div class="container-fluid pt-4">
-			<h2>Selamat datang di halaman Teknisi</h2>
+			<h2>halo <?= $this->session->userdata('nama_user') ?>, Selamat datang di halaman Teknisi</h2>
 		</div>
 	</div>
 	<!-- Page Content -->
