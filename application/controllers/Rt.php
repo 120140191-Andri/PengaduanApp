@@ -30,12 +30,15 @@ class Rt extends CI_Controller {
         }else{
             redirect('/');
         }
+
     }
 
 	public function index()
 	{
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
 		$this->load->helper('url');
-		$this->load->view('Rt/Dashboard');
+		$this->load->view('Rt/Dashboard', $dat);
 	}
 
     public function tes(){
@@ -44,6 +47,8 @@ class Rt extends CI_Controller {
     }
 
     public function List_lab(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['lab'] = $this->lab_model->AmbilLab()->result();
@@ -53,6 +58,8 @@ class Rt extends CI_Controller {
     }
 
     public function List_Kalab(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['kalab'] = $this->users_model->AmbilSemuaUserKalab()->result();
@@ -62,6 +69,8 @@ class Rt extends CI_Controller {
     }
 
     public function Tambah_Lab(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['kalab'] = $this->users_model->AmbilUserKalab()->result();
@@ -71,12 +80,16 @@ class Rt extends CI_Controller {
     }
 
     public function Tambah_Kalab(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
         //echo password_hash('1234',PASSWORD_DEFAULT);
-        $this->load->view('Rt/TambahKalab');
+        $this->load->view('Rt/TambahKalab', $dat);
     }
 
     public function Ubah_Lab($id){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['id'] = $id;
@@ -88,6 +101,8 @@ class Rt extends CI_Controller {
     }
 
     public function Ubah_Kalab($id){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['id'] = $id;
@@ -188,6 +203,8 @@ class Rt extends CI_Controller {
 	}
 
     public function Ganti_Password(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['id'] = $this->session->userdata('id');
@@ -208,6 +225,8 @@ class Rt extends CI_Controller {
 
     function list_laporan()
     {
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $filter = $this->input->post('filter');
@@ -237,6 +256,8 @@ class Rt extends CI_Controller {
 
     function TTD_laporan()
     {
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $filter = $this->input->post('filter');
@@ -265,6 +286,8 @@ class Rt extends CI_Controller {
     }
 
     public function Tambah_TTD(){
+        $dat['notif'] = count($this->laporan_model->TampilLaporanSemuaRT()->result());
+
         $this->load->helper('url');
 
         $dat['lab'] = $this->lab_model->AmbilSemuaLab()->result();

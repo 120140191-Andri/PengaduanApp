@@ -25,7 +25,7 @@
 				<li><a href="<?= base_url('Rt/') ?>"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
 				<li><a href="<?= base_url('Rt/List_lab') ?>"><i class="fas fa-clipboard-list mr-2"></i>List Lab</a></li>
 				<li><a href="<?= base_url('Rt/List_Kalab') ?>"><i class="fas fa-clipboard-list mr-2"></i>List Ketua Lab</a></li>
-				<li><a href="<?= base_url('Rt/List_Laporan') ?>"><i class="fas fa-folder-open mr-2"></i>List Laporan</a></li>
+				<li><a href="<?= base_url('Rt/List_Laporan') ?>"><i class="fas fa-folder-open mr-2"></i>List Laporan <span class="badge badge-success"><?= $notif ?></span> </a></li>
 				<!-- <li><a href="<base_url('Rt/TTD_Laporan') ?>"><i class="fas fa-file-medical-alt mr-2"></i>Tanda Tangan Laporan</a></li> -->
 				<li><a href="<?= base_url('Rt/Ganti_Password') ?>"><i class="fas fa-key mr-2"></i>Ganti Password</a></li>
 				<li><a href="<?= base_url('Login/logout') ?>"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
