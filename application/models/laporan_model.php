@@ -101,7 +101,7 @@ Class laporan_model extends CI_Model
             'laporan.status' => 'diproses',
         );
 
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
@@ -111,13 +111,13 @@ Class laporan_model extends CI_Model
         return $res;
     }
 
-    function TampilLaporanProsesRT()
+    function TampilLaporanFilterRT($fil)
     {
         $dat = array(
-            'laporan.status' => 'diproses',
+            'properti.id_lab' => $fil,
         );
 
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
@@ -134,7 +134,7 @@ Class laporan_model extends CI_Model
             'ttd_laporan.status' => 'dikirim',
         );
 
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->where($dat);
@@ -150,7 +150,7 @@ Class laporan_model extends CI_Model
             'lab.id' => $this->session->userdata('id_lab'),
         );
 
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->where($dat);
@@ -165,7 +165,7 @@ Class laporan_model extends CI_Model
             'laporan.status' => 'selesai',
         );
 
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
@@ -181,7 +181,7 @@ Class laporan_model extends CI_Model
             'laporan.status' => 'selesai',
         );
 
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
@@ -198,7 +198,7 @@ Class laporan_model extends CI_Model
             'ttd_laporan.status' => 'dibalas',
         );
 
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->where($dat);
@@ -214,7 +214,7 @@ Class laporan_model extends CI_Model
             'lab.id' => $this->session->userdata('id_lab'),
         );
 
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->where($dat);
@@ -225,10 +225,26 @@ Class laporan_model extends CI_Model
 
     function TampilLaporanSemua()
     {
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->order_by('laporan.id', 'DESC');
+        $res = $this->db->get();
+        return $res;
+    }
+
+    function TampilLaporanValid()
+    {
+        $dat = array(
+            'laporan.status' => 'divalidasi',
+        );
+
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
+        $this->db->from('laporan');
+        $this->db->join('properti', 'properti.id = laporan.id_prop');
+        $this->db->join('users', 'users.id = laporan.id_teknisi');
+        $this->db->where($dat);
         $this->db->order_by('laporan.id', 'DESC');
         $res = $this->db->get();
         return $res;
@@ -236,19 +252,24 @@ Class laporan_model extends CI_Model
 
     function TampilLaporanSemuaRT()
     {
-        $this->db->select('*, laporan.created_at AS tgl_laporan');
+        $dat = array(
+            'laporan.status' => 'divalidasi',
+        );
+
+        $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');
         $this->db->from('laporan');
         $this->db->join('properti', 'properti.id = laporan.id_prop');
         $this->db->join('users', 'users.id = laporan.id_teknisi');
         $this->db->join('lab', 'lab.id = properti.id_lab');
         $this->db->order_by('laporan.id', 'DESC');
+        $this->db->where($dat);
         $res = $this->db->get();
         return $res;
     }
 
     function TampilTTDLaporanSemuaRT()
     {
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->order_by('ttd_laporan.id', 'DESC');
@@ -262,7 +283,7 @@ Class laporan_model extends CI_Model
             'lab.id' => $this->session->userdata('id_lab'),
         );
 
-        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, ttd_laporan.id AS id_ttd');
+        $this->db->select('*, ttd_laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan, ttd_laporan.id AS id_ttd');
         $this->db->from('ttd_laporan');
         $this->db->join('lab', 'lab.id = ttd_laporan.id_lab');
         $this->db->where($dat);
@@ -296,6 +317,17 @@ Class laporan_model extends CI_Model
         $this->db->update('ttd_laporan');
 
         return $this->db->error();
+    }
+
+    function validasi($id){
+        $dat = array(
+            'status' => 'divalidasi',
+        );
+
+        $this->db->set($dat);
+        $this->db->where('id', $id);
+        $this->db->update('laporan');
+    
     }
     
 }

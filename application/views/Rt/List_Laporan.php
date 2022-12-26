@@ -51,22 +51,22 @@
 		<div class="container-fluid pt-4">
 			<h2>Manajemen Data Laporan</h2>
 			<form class="form-group" action="<?= base_url('Rt/List_Laporan') ?>" method="post">
-				<h5 class="pb-2">Status Data Laporan</h5>
+				<h5 class="pb-2">Filter Data Lab Laporan</h5>
 				<div class="row">
 					<div class="col-6">
 						<select name="filter" class="form-control">
 							<?php if($fil == 'all'){ ?>
-							<option>Semua</option>
-							<option>Selesai</option>
-							<option>Diproses</option>
-							<?php } elseif($fil == 'proses') { ?>
-							<option>Diproses</option>
-							<option>Semua</option>
-							<option>Selesai</option>
-							<?php } elseif($fil == 'end') { ?>
-							<option>Selesai</option>
-							<option>Diproses</option>
-							<option>Semua</option>
+								<option>Semua Lab</option>
+								<?php foreach ($lab as $r){ ?>
+									<option value="<?= $r->id ?>" ><?= $r->nama_lab ?></option>
+								<?php } ?>
+							<?php } else { ?>
+								<option value="<?= $fil ?>" ><?= $fil_n ?></option>
+								<?php foreach ($lab as $r){ ?>
+									<?php if($fil != $r->id){ ?>
+									<option value="<?= $r->id ?>" ><?= $r->nama_lab ?></option>
+									<?php } ?>
+								<?php } ?>
 							<?php } ?>
 						</select>
 						<input type="submit" value="Filter Status" class="btn btn-primary btn-login-custom">

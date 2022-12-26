@@ -212,17 +212,17 @@ class Rt extends CI_Controller {
 
         $filter = $this->input->post('filter');
 
+        $dat['lab'] = $this->lab_model->AmbilSemuaLab()->result();
+
         if($filter != null){
 
-            if($filter == 'Diproses'){
-                $dat['laporan'] = $this->laporan_model->TampilLaporanProsesRT()->result();
-                $dat['fil'] = 'proses';
-            }elseif($filter == 'Selesai'){
-                $dat['laporan'] = $this->laporan_model->TampilLaporanSelesaiRT()->result();
-                $dat['fil'] = 'end';
-            }else{
-                $dat['laporan'] = $this->laporan_model->TampilLaporanSemuaRT()->result();
-                $dat['fil'] = 'all';
+            $dat['laporan'] = $this->laporan_model->TampilLaporanFilterRT($filter)->result();
+            $dat['fil'] = $filter;
+
+            foreach ($dat['lab'] as $r){
+                if($r->id == $filter){
+                    $dat['fil_n'] = $r->nama_lab;
+                }
             }
 
         }else{

@@ -60,11 +60,19 @@
 					<option>Semua</option>
 					<option>Selesai</option>
 					<option>Diproses</option>
+					<option>Divalidasi</option>
 					<?php } elseif($fil == 'proses') { ?>
 					<option>Diproses</option>
 					<option>Semua</option>
 					<option>Selesai</option>
+					<option>Divalidasi</option>
 					<?php } elseif($fil == 'end') { ?>
+					<option>Selesai</option>
+					<option>Diproses</option>
+					<option>Semua</option>
+					<option>Divalidasi</option>
+					<?php } elseif($fil == 'valid') { ?>
+					<option>Divalidasi</option>
 					<option>Selesai</option>
 					<option>Diproses</option>
 					<option>Semua</option>
@@ -102,6 +110,8 @@
 						<th>Masalah</th>
 						<th>Tanggal</th>
 						<th>Foto Bukti</th>
+						<th>Status</th>
+						<th>Aksi</th>
 					</tr>
 				</thead>
 				<tbody id="show_data">
@@ -119,6 +129,8 @@
 						<td><?php echo $row->masalah; ?></td>
 						<td><?php echo date('Y-m-d', strtotime($row->tgl_laporan)); ?></td>
 						<td><img src="<?= base_url('assets/foto/'. $row->foto_bukti) ?>" alt="" srcset=""></td>
+						<td><?php echo $row->status_laporan; ?></td>
+						<td><?php if($row->status_laporan == 'selesai'){ ?> <a href="<?= base_url('Kalab/sys_validasi/'.$row->id_laporan) ?>">Validasi Laporan</a> <?php } ?> </td>
 					</tr>
 					<?php } ?>
 				</tbody>

@@ -218,6 +218,9 @@ class Kalab extends CI_Controller {
             }elseif($filter == 'Selesai'){
                 $dat['laporan'] = $this->laporan_model->TampilLaporanSelesai()->result();
                 $dat['fil'] = 'end';
+            }elseif($filter == 'Divalidasi'){
+                $dat['laporan'] = $this->laporan_model->TampilLaporanValid()->result();
+                $dat['fil'] = 'valid';
             }else{
                 $dat['laporan'] = $this->laporan_model->TampilLaporanSemua()->result();
                 $dat['fil'] = 'all';
@@ -289,6 +292,13 @@ class Kalab extends CI_Controller {
 			// redirect('Kalab/TTD_Laporan');
         }
         
+    }
+
+    public function sys_validasi($id){
+
+        $v = $this->laporan_model->validasi($id);
+        // var_dump($v);
+        redirect('Kalab/List_Laporan');
     }
 
 }

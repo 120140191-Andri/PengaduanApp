@@ -25,8 +25,8 @@
 					Teknisi</a></li>
 			<li><a href="<?= base_url('Kalab/List_Laporan') ?>"><i class="fas fa-folder-open mr-2"></i>List Laporan</a>
 			</li>
-			<li><a href="<?= base_url('Kalab/TTD_Laporan') ?>"><i class="fas fa-file-medical-alt mr-2"></i>Tanda Tangan
-					Laporan</a></li>
+			<!-- <li><a href="< base_url('Kalab/TTD_Laporan') ?>"><i class="fas fa-file-medical-alt mr-2"></i>Tanda Tangan
+					Laporan</a></li> -->
 			<li><a href="<?= base_url('Kalab/Ganti_Password') ?>"><i class="fas fa-key mr-2"></i>Ganti Password</a></li>
 			<li><a href="<?= base_url('Login/logout') ?>"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
 		</ul>
