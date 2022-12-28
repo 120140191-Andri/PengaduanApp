@@ -173,7 +173,6 @@
 		
 		$.get('http://localhost/PengaduanApp/assets/template/template.html', function(data){
 			temp = data;
-			console.log(data);
 		});
 
 		// DataTables initialisation
