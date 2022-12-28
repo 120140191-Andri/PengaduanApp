@@ -133,8 +133,6 @@
 	<!-- Page Content -->
 	</div>
 
-
-
 </body>
 
 </html>
@@ -170,6 +168,14 @@
 			format: 'MMMM Do YYYY'
 		});
 
+		var temp = "";
+		var bases = $('#baseurl').value;
+		
+		$.get('http://localhost/PengaduanApp/assets/template/template.html', function(data){
+			temp = data;
+			console.log(data);
+		});
+
 		// DataTables initialisation
 		var table = $('#example').DataTable({
 			dom: 'Bfrtip',
@@ -177,10 +183,20 @@
 				extend: 'print',
 				exportOptions: {
 					stripHtml: false,
-					columns: [0, 1, 2, 3, 4, 5, 6]
+					columns: [0, 1, 2, 3, 4, 5, 6, 7]
 					//specify which column you want to print
+				},
+				customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            temp
+                        );
 
-				}
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
 			}]
 		});
 

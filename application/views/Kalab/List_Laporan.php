@@ -184,7 +184,7 @@
 				extend: 'print',
 				exportOptions: {
 					stripHtml: false,
-					columns: [0, 1, 2, 3, 4, 5, 6]
+					columns: [0, 1, 2, 3, 4, 5, 6, 8]
 					//specify which column you want to print
 
 				}
