@@ -170,14 +170,17 @@
 
 		var temp = "";
 		var bases = $('#baseurl').value;
+		var sel = false;
 		
-		$.get('http://localhost/PengaduanApp/assets/template/template.html', function(data){
-			temp = data;
-		});
+		if(sel == false){
+			$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
+				temp = data;
+			});	
+		}
 
 		// DataTables initialisation
 		var table = $('#example').DataTable({
-			dom: 'Bfrtip',
+			dom: '<"toolbar">Bfrtip',
 			buttons: [{
 				extend: 'print',
 				exportOptions: {
@@ -197,6 +200,26 @@
                         .css( 'font-size', 'inherit' );
                 }
 			}]
+		});
+
+		$('div.toolbar').html(`
+		<select id="pilih_surat">
+			<option value="1">Surat Kerusakan</option>
+			<option value="2">Berita Acara</option>
+		</select>`);
+
+		$('select').on('change', function() {
+			sel = true;
+
+			if(this.value == 1){
+				$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
+					temp = data;
+				});	
+			}else{
+				$.get('http://localhost/PengaduanApp/assets/template/surat_berita_acara.html', function(data){
+					temp = data;
+				});
+			}
 		});
 
 		// Refilter the table
