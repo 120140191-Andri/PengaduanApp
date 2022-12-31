@@ -132,11 +132,23 @@
 	</div>
 	<!-- Page Content -->
 	</div>
+	
+	<?php  
+	if($kalab != null){
+		foreach ($kalab as $row){ 
+	?>
+	<input type="hidden" id="nama_kaleb" value="<?= $row->nama ?>">
+	<input type="hidden" id="nip_kaleb" value="<?= $row->NIP ?>">
+	<?php 
+		} 
+	}
+	?>
 
 </body>
 
 </html>
 
+<?php if($fil != 'all'){ ?>
 <script>
 	var minDate, maxDate;
 
@@ -173,9 +185,11 @@
 		var sel = false;
 		
 		if(sel == false){
+			
 			$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
 				temp = data;
 			});	
+			
 		}
 
 		// DataTables initialisation
@@ -189,15 +203,31 @@
 					//specify which column you want to print
 				},
 				customize: function ( win ) {
+
+					const date = new Date();
+			
+					let day = date.getDate();
+					let month = date.getMonth() + 1;
+					let year = date.getFullYear();
+						
+					let currentDate = `${day}-${month}-${year}`;
+
+					var res = temp.replace("<span id='tgl'></span>", "<span id='tgl'>" + currentDate + "</span>");
+
+					var res = res.replace("<span id='nama_kaleb'></span>", "<span id='nama_kaleb'>"+ $('#nama_kaleb').val() +"</span>");
+
+					var res = res.replace("<span id='nip_kaleb'></span>", "<span id='nip_kaleb'>"+ $('#nip_kaleb').val() +"</span>");
+
                     $(win.document.body)
                         .css( 'font-size', '10pt' )
                         .prepend(
-                            temp
+                            res
                         );
 
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
+						
                 }
 			}]
 		});
@@ -212,13 +242,17 @@
 			sel = true;
 
 			if(this.value == 1){
+
 				$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
 					temp = data;
 				});	
+	
 			}else{
+
 				$.get('http://localhost/PengaduanApp/assets/template/surat_berita_acara.html', function(data){
 					temp = data;
 				});
+				
 			}
 		});
 
@@ -229,3 +263,58 @@
 	});
 
 </script>
+<?php }else{ ?>
+<script>
+	var minDate, maxDate;
+
+	// Custom filtering function which will search data in column four between two values
+	$.fn.dataTable.ext.search.push(
+		function (settings, data, dataIndex) {
+			var min = minDate.val();
+			var max = maxDate.val();
+			var date = new Date(data[7]);
+
+			if (
+				(min === null && max === null) ||
+				(min === null && date <= max) ||
+				(min <= date && max === null) ||
+				(min <= date && date <= max)
+			) {
+				return true;
+			}
+			return false;
+		}
+	);
+
+	$(document).ready(function () {
+		// Create date inputs
+		minDate = new DateTime($('#min'), {
+			format: 'MMMM Do YYYY'
+		});
+		maxDate = new DateTime($('#max'), {
+			format: 'MMMM Do YYYY'
+		});
+
+		var temp = "";
+		var bases = $('#baseurl').value;
+		var sel = false;
+		
+		if(sel == false){
+			
+			$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
+				temp = data;
+			});	
+			
+		}
+
+		// DataTables initialisation
+		var table = $('#example').DataTable();
+
+		// Refilter the table
+		$('#min, #max').on('change', function () {
+			table.draw();
+		});
+	});
+
+</script>
+<?php } ?>

@@ -115,6 +115,7 @@ Class laporan_model extends CI_Model
     {
         $dat = array(
             'properti.id_lab' => $fil,
+            'laporan.status' => 'divalidasi'
         );
 
         $this->db->select('*, laporan.created_at AS tgl_laporan, laporan.status AS status_laporan, laporan.id AS id_laporan');

@@ -126,12 +126,13 @@ class Rt extends CI_Controller {
     }
 
     public function sys_tambah_kalab(){
+        $nip = $this->input->post('nip');
         $nama = $this->input->post('nama');
         $email = $this->input->post('email');
 
         $cek = count($this->users_model->CekEmailUserTambah($email)->result());
         if($cek == 0){
-            $res = $this->users_model->TambahKalab($nama, $email);
+            $res = $this->users_model->TambahKalab($nip, $nama, $email);
             redirect('Rt/List_Kalab');
         }else{
             $this->session->set_flashdata('pesan', 'Email Sudah Terdaftar!');
@@ -233,10 +234,22 @@ class Rt extends CI_Controller {
 
         $dat['lab'] = $this->lab_model->AmbilSemuaLab()->result();
 
-        if($filter != null){
+        if($filter != null && $filter != 'Semua Lab'){
 
             $dat['laporan'] = $this->laporan_model->TampilLaporanFilterRT($filter)->result();
             $dat['fil'] = $filter;
+
+            if($dat['laporan'] != null){
+                $whr = array(
+                    'id_lab' => $dat['laporan'][0]->id_lab,
+                    'role' => 'kalab'
+                );
+    
+                $this->db->where($whr);
+                $dat['kalab'] = $this->db->get('users')->result();
+            }else{
+                $dat['kalab'] = null;
+            }
 
             foreach ($dat['lab'] as $r){
                 if($r->id == $filter){
@@ -247,6 +260,7 @@ class Rt extends CI_Controller {
         }else{
             $dat['laporan'] = $this->laporan_model->TampilLaporanSemuaRT()->result();
             $dat['fil'] = 'all';
+            $dat['kalab'] = null;
         }
 
         // var_dump($dat);

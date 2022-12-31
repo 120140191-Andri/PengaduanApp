@@ -105,9 +105,10 @@ Class users_model extends CI_Model
         return $res;
     }
 
-    function TambahKalab($nama, $email)
+    function TambahKalab($nip, $nama, $email)
     {
         $dat = array(
+            'NIP' => $nip,
             'nama' => $nama,
             'email' => $email,
             'role' => 'kalab',

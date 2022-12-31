@@ -41,6 +41,7 @@
 		<div class="container-fluid pt-4">
 			<h2>Tambah Data Ketua Lab</h2>
 			<form class="form-group" action="<?= base_url('Rt/sys_tambah_kalab') ?>" method="post">
+				<input type="text" name="nip" placeholder="NIP" class="form-control col-12 col-md-6 mb-3">
 				<input type="text" name="nama" placeholder="Nama" class="form-control col-12 col-md-6 mb-3">
 				<input type="email" name="email" placeholder="Email" class="form-control col-12 col-md-6 mb-3">
 				<label>*Password Default adalah: 1234, beritahu Pengguna segera ganti password setelah mendapatkan akun</label>
