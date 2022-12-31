@@ -139,6 +139,8 @@
 	?>
 	<input type="hidden" id="nama_kaleb" value="<?= $row->nama ?>">
 	<input type="hidden" id="nip_kaleb" value="<?= $row->NIP ?>">
+	<input type="hidden" id="nama_user" value="<?= $this->session->userdata('nama_user') ?>">
+	<input type="hidden" id="nip_user" value="<?= $this->session->userdata('nip_user') ?>">
 	<?php 
 		} 
 	}
@@ -213,6 +215,10 @@
 					let currentDate = `${day}-${month}-${year}`;
 
 					var res = temp.replace("<span id='tgl'></span>", "<span id='tgl'>" + currentDate + "</span>");
+
+					var res = res.replace("<span id='nama_user'></span>", "<span id='nama_user'>"+ $('#nama_user').val() +"</span>");
+
+					var res = res.replace("<span id='nip_user'></span>", "<span id='nip_user'>"+ $('#nip_user').val() +"</span>");
 
 					var res = res.replace("<span id='nama_kaleb'></span>", "<span id='nama_kaleb'>"+ $('#nama_kaleb').val() +"</span>");
 
