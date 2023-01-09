@@ -183,6 +183,7 @@
 		});
 
 		var temp = "";
+		var tempFooter = "";
 		var bases = $('#baseurl').value;
 		var sel = false;
 		
@@ -190,6 +191,10 @@
 			
 			$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
 				temp = data;
+			});	
+
+			$.get('http://localhost/PengaduanApp/assets/template/footer_surat_kerusakan.html', function(data){
+				tempFooter = data;
 			});	
 			
 		}
@@ -233,6 +238,12 @@
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
+
+						$(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .append(
+                            tempFooter
+                        );
 						
                 }
 			}]
@@ -252,12 +263,20 @@
 				$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
 					temp = data;
 				});	
+
+				$.get('http://localhost/PengaduanApp/assets/template/footer_surat_kerusakan.html', function(data){
+					tempFooter = data;
+				});	
 	
 			}else{
 
 				$.get('http://localhost/PengaduanApp/assets/template/surat_berita_acara.html', function(data){
 					temp = data;
 				});
+
+				$.get('http://localhost/PengaduanApp/assets/template/footer_surat_berita_acara.html', function(data){
+					tempFooter = data;
+				});	
 				
 			}
 		});
