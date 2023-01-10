@@ -7,18 +7,32 @@ Class users_model extends CI_Model
             'email' => $email,
         );
 
-        $jum = $this->db->get_where('users', $dat)->num_rows();
+        $this->db->where($dat);
+        $jum = $this->db->get('users')->num_rows();
+        $resk = $this->db->get('users')->result();
 
         if($jum == 1){
-            $res = $this->db->get_where('users', $dat)->result();
+
+            if($resk[0]->role == 'rt'){
+                $this->db->select('*, users.id AS id_user');
+                $this->db->where($dat);
+                $res = $this->db->get('users')->result();    
+            }else{
+                $this->db->select('*, users.id AS id_user');
+                $this->db->from('users');
+                $this->db->join('lab', 'users.id_lab = lab.id');
+                $this->db->where($dat);
+                $res = $this->db->get()->result();
+            }
             
             if(password_verify($pass,$res[0]->password)){
                 $data_login = array(
                     'is_login' => TRUE,
                     'email'    => $res[0]->email,
-                    'id'       => $res[0]->id,
+                    'id'       => $res[0]->id_user,
                     'r'        => $res[0]->role,
                     'id_lab'   => $res[0]->id_lab,
+                    'nama_lab' => $res[0]->nama_lab,
                     'nama_user'=> $res[0]->nama,
                     'nip_user' => $res[0]->NIP
                 );

@@ -186,18 +186,14 @@
 		var tempFooter = "";
 		var bases = $('#baseurl').value;
 		var sel = false;
-		
-		if(sel == false){
 			
-			$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
-				temp = data;
-			});	
+		$.get('http://localhost/PengaduanApp/assets/template/surat_berita_acara.html', function(data){
+			temp = data;
+		});	
 
-			$.get('http://localhost/PengaduanApp/assets/template/footer_surat_kerusakan.html', function(data){
-				tempFooter = data;
-			});	
-			
-		}
+		$.get('http://localhost/PengaduanApp/assets/template/footer_surat_berita_acara.html', function(data){
+			tempFooter = data;
+		});	
 
 		// DataTables initialisation
 		var table = $('#example').DataTable({
@@ -240,46 +236,22 @@
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
 
-						$(win.document.body)
+						var tempFooters = tempFooter.replace("<span id='nama_rt'></span>", "<span id='nama_rt'>"+ $('#nama_user').val() +"</span>");
+
+						var tempFooters = tempFooters.replace("<span id='nip_rt'></span>", "<span id='nip_rt'>"+ $('#nip_user').val() +"</span>");
+
+						var tempFooters = tempFooters.replace("<span id='nama_kaleb'></span>", "<span id='nama_kaleb'>"+ $('#nama_kaleb').val() +"</span>");
+
+						var tempFooters = tempFooters.replace("<span id='nip_kaleb'></span>", "<span id='nip_kaleb'>"+ $('#nip_kaleb').val() +"</span>");
+
+					$(win.document.body)
                         .css( 'font-size', '10pt' )
                         .append(
-                            tempFooter
+                            tempFooters
                         );
 						
                 }
 			}]
-		});
-
-		$('div.toolbar').html(`
-		<select id="pilih_surat">
-			<option value="1">Surat Kerusakan</option>
-			<option value="2">Berita Acara</option>
-		</select>`);
-
-		$('select').on('change', function() {
-			sel = true;
-
-			if(this.value == 1){
-
-				$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function(data){
-					temp = data;
-				});	
-
-				$.get('http://localhost/PengaduanApp/assets/template/footer_surat_kerusakan.html', function(data){
-					tempFooter = data;
-				});	
-	
-			}else{
-
-				$.get('http://localhost/PengaduanApp/assets/template/surat_berita_acara.html', function(data){
-					temp = data;
-				});
-
-				$.get('http://localhost/PengaduanApp/assets/template/footer_surat_berita_acara.html', function(data){
-					tempFooter = data;
-				});	
-				
-			}
 		});
 
 		// Refilter the table

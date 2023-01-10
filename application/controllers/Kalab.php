@@ -231,6 +231,12 @@ class Kalab extends CI_Controller {
             $dat['fil'] = 'all';
         }
 
+        $whr = array(
+            'role' => 'rt',
+        );
+
+        $dat['rtu'] = $this->db->get_where('users', $whr)->result();
+
         // var_dump($dat);
         // die;
         $this->load->view('Kalab/List_Laporan', $dat);

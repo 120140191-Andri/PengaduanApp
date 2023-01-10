@@ -120,7 +120,7 @@
 			foreach ($laporan as $row){ 
 			$i++;
 			?>
-					<tr>
+					<tr <?= ($row->status_laporan == 'divalidasi') ? "class='ok'" : ""; ?>>
 						<td><?php echo $i; ?></td>
 						<td><?php echo $row->nama_prop; ?></td>
 						<td><?php echo $row->nama; ?></td>
@@ -140,7 +140,11 @@
 	<!-- Page Content -->
 	</div>
 
-
+	<input type="hidden" id="nama_kaleb" value="<?= $this->session->userdata('nama_user') ?>">
+	<input type="hidden" id="nip_kaleb" value="<?= $this->session->userdata('nip_user') ?>">
+	<input type="hidden" id="nama_rt" value="<?= $rtu[0]->nama ?>">
+	<input type="hidden" id="nip_rt" value="<?= $rtu[0]->NIP ?>">
+	<input type="hidden" id="nama_lab" value="<?= $this->session->userdata('nama_lab') ?>">
 
 </body>
 
@@ -177,16 +181,72 @@
 			format: 'MMMM Do YYYY'
 		});
 
+		var temp = "";
+		var tempFooter = "";
+
+		$.get('http://localhost/PengaduanApp/assets/template/surat_kerusakan.html', function (data) {
+			temp = data;
+		});
+
+		$.get('http://localhost/PengaduanApp/assets/template/footer_surat_kerusakan.html', function (data) {
+			tempFooter = data;
+		});
+
 		// DataTables initialisation
 		var table = $('#example').DataTable({
 			dom: 'Bfrtip',
 			buttons: [{
 				extend: 'print',
+				title: '',
 				exportOptions: {
 					stripHtml: false,
+					rows: '.ok',
 					columns: [0, 1, 2, 3, 4, 5, 6, 8]
-					//specify which column you want to print
+				},
+				customize: function ( win ) {
 
+					const date = new Date();
+
+					let day = date.getDate();
+					let month = date.getMonth() + 1;
+					let year = date.getFullYear();
+						
+					let currentDate = `${day}-${month}-${year}`;
+
+					var res = temp.replace("<span id='tgl'></span>", "<span id='tgl'>" + currentDate + "</span>");
+
+					var res = res.replace("<span id='nama_rt'></span>", "<span id='nama_rt'>"+ $('#nama_rt').val() +"</span>");
+
+					var res = res.replace("<span id='nip_rt'></span>", "<span id='nip_rt'>"+ $('#nip_rt').val() +"</span>");
+
+					var res = res.replace("<span id='nama_kaleb'></span>", "<span id='nama_kaleb'>"+ $('#nama_kaleb').val() +"</span>");
+
+					var res = res.replace("<span id='nip_kaleb'></span>", "<span id='nip_kaleb'>"+ $('#nip_kaleb').val() +"</span>");
+
+					var res = res.replace("<span id='nama_lab'></span>", "<span id='nama_lab'>"+ $('#nama_lab').val() +"</span>");
+
+					$(win.document.body)
+						.css( 'font-size', '10pt' )
+						.prepend(
+							res
+						);
+
+					$(win.document.body).find( 'table' )
+						.addClass( 'compact' )
+						.css( 'font-size', 'inherit' );
+
+					var tempFooters = tempFooter.replace("<span id='nama_kaleb'></span>", "<span id='nama_kaleb'>"+ $('#nama_kaleb').val() +"</span>");
+
+					var tempFooters = tempFooters.replace("<span id='nip_kaleb'></span>", "<span id='nip_kaleb'>"+ $('#nip_kaleb').val() +"</span>");
+
+					var tempFooters = tempFooters.replace("<span id='nama_lab'></span>", "<span id='nama_lab'>"+ $('#nama_lab').val() +"</span>");
+
+					$(win.document.body)
+						.css( 'font-size', '10pt' )
+						.append(
+							tempFooters
+						);
+						
 				}
 			}]
 		});
